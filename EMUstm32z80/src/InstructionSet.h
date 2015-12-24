@@ -42,7 +42,7 @@ int POP_QQ(void);
 
 int EX_DE_HL(void);
 
-int EX_AF_AFf(void);
+int EX_AF_AFalt(void);
 
 int EXX(void);
 
