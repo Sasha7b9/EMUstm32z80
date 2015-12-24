@@ -2,5 +2,16 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\..\src\main.c" />
+    <ClCompile Include="..\..\src\registers.c" />
+    <ClCompile Include="..\..\src\RAM.c" />
+    <ClCompile Include="..\..\src\Timer.c" />
+    <ClCompile Include="..\..\src\InstructionSet.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\registers.h" />
+    <ClInclude Include="..\..\src\defines.h" />
+    <ClInclude Include="..\..\src\RAM.h" />
+    <ClInclude Include="..\..\src\Timer.h" />
+    <ClInclude Include="..\..\src\InstructionSet.h" />
   </ItemGroup>
 </Project>

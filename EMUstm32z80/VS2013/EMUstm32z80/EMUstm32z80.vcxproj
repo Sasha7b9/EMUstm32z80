@@ -49,7 +49,7 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
@@ -78,7 +78,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\InstructionSet.c" />
     <ClCompile Include="..\..\src\main.c" />
+    <ClCompile Include="..\..\src\RAM.c" />
+    <ClCompile Include="..\..\src\registers.c" />
+    <ClCompile Include="..\..\src\Timer.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\defines.h" />
+    <ClInclude Include="..\..\src\InstructionSet.h" />
+    <ClInclude Include="..\..\src\RAM.h" />
+    <ClInclude Include="..\..\src\registers.h" />
+    <ClInclude Include="..\..\src\Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
