@@ -23,4 +23,4 @@ typedef uint8 bool;
 
 #define BINARY_U8( bits ) _bitset(0##bits)
 
-typedef int(*pFuncVV)(void);
+typedef int(*pFuncIV)(void);

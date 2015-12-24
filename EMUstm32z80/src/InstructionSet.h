@@ -121,9 +121,75 @@ int CPL(void);          // CPL          A <- !A
 
 int CCF(void);          // CCF          CY <- !CY
 
+int SCF(void);          // CCF          CY <- 1
+
+int NOP(void);          // NOP
+
+int HALT(void);         // HALT
+
+int DI(void);           // DI
+
+int EI(void);           // EI
+
+
+int ADD_HL_SS(void);    // ADD HL, SS   HL <- HL + SS
+
+int INC_SS(void);       // INC SS       SS <- SS + 1
+
+int DEC_SS(void);       // DEC SS       SS <- SS - 1
+
+
+int RLCA(void);
+
+int RLA(void);
+
+int RRCA(void);
+
+int RRA(void);
+
+
+int JP_NN(void);        // JP NN        PC <- NN
+
+int JP_CC_NN(void);     // JP CC, NN    jump for condition
+
+int JR_E(void);         // JR E         PC <- PC + E
+
+int JR_C_E(void);       // JR C, E      if (C == 1) PC <- PC + E
+
+int JR_NC_E(void);      // JR NC, E     if (C == 0) PC <- PC + E
+
+int JR_Z_E(void);       // JR Z, E      if (Z == 1) PC <- PC + E
+
+int JR_NZ_E(void);      // JR NZ, E     if(Z == 0) PC <- PC + E
+
+int JP_pHL(void);       // JP (HL)      PC <- HL
+
+int DJNZ_E(void);       // DJNZ, E      B <- B - 1; if(B != 0) PC <- PC + E
+
+int CALL_NN(void);      // CALL NN      (SP-1) <- PC[CT]
+                        //              (SP-2) <- PC[LOW]
+                        //              PC <- NN
+
+int CALL_CC_NN(void);   // CALL CC, NN  if(CC)  CALL NN
+
+int RET(void);          // RET          PC[LOW] <- (SP)
+                        //              PC[HI] <- (SP + 1)
+
+int RET_CC(void);       // RET CC       if(CC)  RET
+
+int RST_P(void);        // RST P        (SP-1) <- PC[HI]
+                        //              (SP-2) <- PC[LOW]
+                        //              PC[HI] <- 0
+                        //              PC[LOW] <- P
+
+int IN_A_pN(void);      // IN A, (N)    A <- (N)
+
+int OUT_pN_A(void);     // IN (N), A    (N) <- A
 
 int RunCommandWithPrefixDD(void);
 
 int RunCommandWithPrefixFD(void);
 
 int RunCommandWithPrefixED(void);
+
+int RunCommandWithPrefixCB(void);

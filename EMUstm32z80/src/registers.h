@@ -48,6 +48,7 @@ typedef enum
 
 // Return value from RAM, pointed to PC, and increment PC
 uint8 GetFromPCandInc(void);
+uint8 GetPrevPC(void);
 
 uint8 GetReg8(REG_8 reg);
 void LoadReg8(REG_8 dest, uint8 value);
