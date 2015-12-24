@@ -1,7 +1,7 @@
 file = open("array.txt", "w")
 
 for i in range (256):
-    file.write("\*   ")
+    file.write("/*   ")
     str_ = bin(i)
     str = str_[2:]
 
@@ -22,6 +22,6 @@ for i in range (256):
     file.write(' ')
     
     file.write(str[5:])
-    file.write("   *\ \n")
+    file.write("   */ 0,\n")
 
 file.close()

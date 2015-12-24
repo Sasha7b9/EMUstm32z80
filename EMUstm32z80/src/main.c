@@ -6,10 +6,6 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-int RunCommand(void);
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main(void)
 {
     /*
@@ -27,28 +23,4 @@ int main(void)
         uint tackts = RunCommand();
         Timer_WaitForNTacts(tackts);
     }
-}
-
-
-//------------------------------------------------------------------------------------------------------------------------------------------------------
-// Executes the command for address
-// Return the number of tackts
-int RunCommand(void)
-{
-    uint8 memValue = GetFromPCandInc();
-
-    if((memValue & BINARY_U8(11000000)) == BINARY_U8(01000000))
-    {
-        LD_R_R(memValue);
-    }
-    else if((memValue & BINARY_U8(00000110)) == BINARY_U8(00000110))
-    {
-        LD_R_N(memValue);
-    }
-    else if(memValue == 0xdd)
-    {
-        RunCommandWithPrefixDD();
-    }
-
-    return 0;
 }
