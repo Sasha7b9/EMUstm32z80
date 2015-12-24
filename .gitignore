@@ -1,0 +1,5 @@
+*.sdf
+*.opensdf
+EMUstm32z80/VS2013/EMUstm32z80/Debug/
+EMUstm32z80/Objects/
+EMUstm32z80/Listings/
