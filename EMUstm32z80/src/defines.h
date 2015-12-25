@@ -29,8 +29,11 @@ typedef int(*pFuncIV)(void);
 typedef uint8*(*pFuncpU8V)(void);
 typedef uint16*(*pFuncpU16V)(void);
 typedef void(*pFuncVU16)(uint16);
+typedef bool(*pFuncBV)(void);
 
 #define GET_BIT(value, bit) (((value) & (1 << bit)) >> bit)
 #define SET_BIT(value, bit) ((value) | (1 << bit))
 #define RES_BIT(value, bit) ((value) & (~(1 << bit)))
-#define LOAD_BIT(value, bit, vBit) if(vBit) SET_BIT(value, bit); else RES_BIT(value, bit)
+#define LOAD_BIT(value, bit, vBit) if(vBit) ((value) |= (1 << bit)); else ((value) &= (~(1 << bit)))
+
+#define LOG_ERROR()

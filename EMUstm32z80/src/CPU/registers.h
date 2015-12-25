@@ -1,15 +1,15 @@
 #pragma once
 
 
-#include "../defines.h"
+#include "defines.h"
 
 
 typedef union
 {
     //              C B   E D   L H   F A
     uint8   r8[8];
-    //              BC    DE    HL    AF    SP
-    uint16  r16[5];
+    //              BC    DE    HL    AF  SP IX IY PC
+    uint16  r16[8];
 } REGS;
 
 
@@ -36,7 +36,6 @@ typedef enum
 
 
 // Return value from RAM, pointed to PC, and increment PC
-void SetPC(uint16 value);
 void AddPC(uint8 delta);
 uint8 PCandInc(void);
 uint16 PC16andInc(void);
@@ -46,6 +45,7 @@ uint16 ValuePC(void);
 extern uint8 prevPC;
 extern pFuncpU8V funcsReg8[8];
 extern pFuncpU16V funcsRegDD[4];
+extern pFuncpU16V funcsRegPP[4];
 extern REGS regs;
 extern REGS regsAlt;
 extern uint8 regI;
@@ -61,6 +61,9 @@ extern uint8 imfB;
 #define HL      regs.r16[2]
 #define AF      regs.r16[3]
 #define SP      regs.r16[4]
+#define IX      regs.r16[5]
+#define IY      regs.r16[6]
+#define PC      regs.r16[7]
 
 #define A       regs.r8[7]
 #define B       regs.r8[1]
@@ -75,35 +78,36 @@ extern uint8 imfB;
 #define R       regR
 
 #define SF      (GET_BIT(F, 7))
-#define SET_S   (SET_BIT(F, 7))
-#define RES_S   (RES_BIT(F, 7))
-#define CALC_S(value)   if(GET_BIT(value, 7)) SET_S; else RES_S
+#define SET_S   (F |= 0x80)
+#define RES_S   (F &= ~0x80)
+#define CALC_S(value)   if(value & 0x80) (F |= 0x80); else (F &= ~(0x80));
 
 #define ZF      (GET_BIT(F, 6))
-#define SET_Z   (SET_BIT(F, 6))
-#define RES_Z   (RES_BIT(F, 6))
-#define CALC_Z(value)   if(value) SET_Z; else RES_Z
+#define SET_Z   (F |= 0x40)
+#define RES_Z   (F &= ~0x40)
+#define CALC_Z(value)   if(value) (F &= ~(0x40)); else (F |= 0x40);
+#define LOAD_Z(value)   if(value) SET_Z; else RES_Z;
 
 #define HF      (GET_BIT(F, 4))
-#define SET_H   (SET_BIT(F, 4))
-#define RES_H   (RES_BIT(F, 4))
+#define SET_H   (F |= 0x10)
+#define RES_H   (F &= ~0x10)
 
-#define PF      (GET_BIT(F, 3))
-#define SET_P   (SET_BIT(F, 3))
-#define RES_P   (RES_BIT(F, 3))
+#define PF      (GET_BIT(F, 2))
+#define SET_P   (F |= 4)
+#define RES_P   (RES_BIT(F, 2))
 
-#define VF      (GET_BIT(F, 3))
-#define SET_V   (SET_BIT(F, 3))
-#define RES_V   (RES_BIT(F, 3))
+#define VF      (GET_BIT(F, 2))
+#define SET_V   (SET_BIT(F, 2))
+#define RES_V   (RES_BIT(F, 2))
 
 #define NF      (GET_BIT(F, 1))
-#define SET_N   (SET_BIT(F, 1))
-#define RES_N   (RES_BIT(F, 1))
+#define SET_N   (F |= 0x02)
+#define RES_N   (F &= 0x02)
 
 #define CF      (GET_BIT(F, 0))
-#define SET_C   (SET_BIT(F, 0))
-#define RES_C   (RES_BIT(F, 0))
-#define LOAD_C(value)  if(value) SET_BIT(regs.r8[6], 0); else RES_BIT(regs.r8[6], 0)
+#define SET_C   (F |= 0x01)
+#define RES_C   (F &= ~0x01)
+#define LOAD_C(value)  if(value) SET_C; else RES_C
 
 
 #define Aalt    regsAlt.r8[7]
@@ -121,6 +125,7 @@ extern uint8 imfB;
 #define DD_45(value)    (*funcsRegDD[(value >> 4) & 3]())
 #define SS_45(value)    (*funcsRegDD[(value >> 4) & 3]())
 #define QQ_45(value)    (regs.r16[(value >> 4) & 3])
+#define PP_45(value)    (*funcsRegPP[(value >> 4) & 3]())
 
 
 #define CC(value) ((value >> 3) & 7)

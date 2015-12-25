@@ -414,22 +414,32 @@
       </TargetOption>
       <Groups>
         <Group>
+          <GroupName>CMSIS</GroupName>
+          <Files>
+            <File>
+              <FileName>system_stm32f4xx.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h</FilePath>
+            </File>
+            <File>
+              <FileName>startup_stm32f437xx.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f437xx.s</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f4xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>src</GroupName>
           <Files>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>registers.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\registers.c</FilePath>
-            </File>
-            <File>
-              <FileName>registers.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\registers.h</FilePath>
             </File>
             <File>
               <FileName>defines.h</FileName>
@@ -456,37 +466,45 @@
               <FileType>5</FileType>
               <FilePath>.\src\Timer.h</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>CPU</GroupName>
+          <Files>
             <File>
               <FileName>InstructionSet.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\InstructionSet.c</FilePath>
+              <FilePath>.\src\CPU\InstructionSet.c</FilePath>
             </File>
             <File>
               <FileName>InstructionSet.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\InstructionSet.h</FilePath>
+              <FilePath>.\src\CPU\InstructionSet.h</FilePath>
+            </File>
+            <File>
+              <FileName>registers.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\CPU\registers.c</FilePath>
+            </File>
+            <File>
+              <FileName>registers.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\CPU\registers.h</FilePath>
+            </File>
+            <File>
+              <FileName>DAA.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\CPU\DAA.c</FilePath>
+            </File>
+            <File>
+              <FileName>DAA.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\CPU\DAA.h</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>CMSIS</GroupName>
-          <Files>
-            <File>
-              <FileName>system_stm32f4xx.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h</FilePath>
-            </File>
-            <File>
-              <FileName>startup_stm32f437xx.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f437xx.s</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f4xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c</FilePath>
-            </File>
-          </Files>
+          <GroupName>Hardware</GroupName>
         </Group>
       </Groups>
     </Target>

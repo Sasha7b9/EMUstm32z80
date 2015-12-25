@@ -80,17 +80,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\CPU\DAA.c" />
-    <ClCompile Include="..\..\src\CPU\InstructionSet.c" />
+    <ClCompile Include="..\..\src\CPU\instr.c" />
+    <ClCompile Include="..\..\src\CPU\instrCB.c" />
+    <ClCompile Include="..\..\src\CPU\instrDD.c" />
+    <ClCompile Include="..\..\src\CPU\instrED.c" />
+    <ClCompile Include="..\..\src\CPU\instrFD.c" />
     <ClCompile Include="..\..\src\CPU\registers.c" />
+    <ClCompile Include="..\..\src\Hardware\ports.c" />
     <ClCompile Include="..\..\src\main.c" />
     <ClCompile Include="..\..\src\RAM.c" />
     <ClCompile Include="..\..\src\Timer.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\CPU\DAA.h" />
-    <ClInclude Include="..\..\src\CPU\InstructionSet.h" />
+    <ClInclude Include="..\..\src\CPU\instr.h" />
+    <ClInclude Include="..\..\src\CPU\instrCB.h" />
+    <ClInclude Include="..\..\src\CPU\instrDD.h" />
+    <ClInclude Include="..\..\src\CPU\instrED.h" />
+    <ClInclude Include="..\..\src\CPU\instrFD.h" />
     <ClInclude Include="..\..\src\CPU\registers.h" />
     <ClInclude Include="..\..\src\defines.h" />
+    <ClInclude Include="..\..\src\Hardware\ports.h" />
     <ClInclude Include="..\..\src\RAM.h" />
     <ClInclude Include="..\..\src\Timer.h" />
   </ItemGroup>
