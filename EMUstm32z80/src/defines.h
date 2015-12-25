@@ -4,6 +4,8 @@
 typedef short unsigned int uint16;
 typedef unsigned char uint8;
 typedef unsigned int uint;
+typedef signed short int16;
+typedef signed char int8;
 
 typedef uint8 bool;
 
@@ -26,3 +28,9 @@ typedef uint8 bool;
 typedef int(*pFuncIV)(void);
 typedef uint8*(*pFuncpU8V)(void);
 typedef uint16*(*pFuncpU16V)(void);
+typedef void(*pFuncVU16)(uint16);
+
+#define GET_BIT(value, bit) (((value) & (1 << bit)) >> bit)
+#define SET_BIT(value, bit) ((value) | (1 << bit))
+#define RES_BIT(value, bit) ((value) & (~(1 << bit)))
+#define LOAD_BIT(value, bit, vBit) if(vBit) SET_BIT(value, bit); else RES_BIT(value, bit)

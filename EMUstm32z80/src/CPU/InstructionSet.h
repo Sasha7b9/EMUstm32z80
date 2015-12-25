@@ -1,6 +1,7 @@
 #pragma once
 
-#include "defines.h"
+
+#include "../defines.h"
 
 
 int RunCommand(void);
@@ -70,11 +71,11 @@ int SUB_N(void);        // SUB N        A <- A - N
 int SUB_pHL(void);      // SUB (HL)     A <- A - (HL)
 
 
-int SBC_A_S(void);      // SBC A, S     A <- A - S - CY
+int SBC_A_S(void);      // SBC A, S     A <- A - S - CF
 
-int SBC_A_N(void);      // SBC A, N     A <- A - N - CY
+int SBC_A_N(void);      // SBC A, N     A <- A - N - CF
 
-int SBC_A_pHL(void);    // SBC A, (HL)  A <- A - (HL) - CY
+int SBC_A_pHL(void);    // SBC A, (HL)  A <- A - (HL) - CF
 
 
 int AND_S(void);        // AND S        A <- A & S
@@ -115,13 +116,11 @@ int DEC_M(void);        // DEC M        M <- M - 1
 int DEC_pHL(void);      // DEC (HL)     (HL) <- (HL) - 1
 
 
-int DAA(void);          // DAA
-
 int CPL(void);          // CPL          A <- !A
 
-int CCF(void);          // CCF          CY <- !CY
+int CCF(void);          // CCF          CF <- !CF
 
-int SCF(void);          // CCF          CY <- 1
+int SCF(void);          // CCF          CF <- 1
 
 int NOP(void);          // NOP
 

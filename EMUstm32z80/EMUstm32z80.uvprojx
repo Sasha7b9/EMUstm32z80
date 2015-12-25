@@ -53,7 +53,7 @@
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
-          <BrowseInformation>1</BrowseInformation>
+          <BrowseInformation>0</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -199,11 +199,11 @@
             <ldmm>1</ldmm>
             <ldXref>1</ldXref>
             <BigEnd>0</BigEnd>
-            <AdsALst>1</AdsALst>
+            <AdsALst>0</AdsALst>
             <AdsACrf>1</AdsACrf>
             <AdsANop>0</AdsANop>
             <AdsANot>0</AdsANot>
-            <AdsLLst>1</AdsLLst>
+            <AdsLLst>0</AdsLLst>
             <AdsLmap>1</AdsLmap>
             <AdsLcgr>1</AdsLcgr>
             <AdsLsym>1</AdsLsym>
@@ -373,7 +373,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\STM32Cube_FW_F4\Drivers\CMSIS\Include;..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include</IncludePath>
+              <IncludePath>..\STM32Cube_FW_F4\Drivers\CMSIS\Include;..\STM32Cube_FW_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;.\src</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -420,6 +420,51 @@
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>registers.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\registers.c</FilePath>
+            </File>
+            <File>
+              <FileName>registers.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\registers.h</FilePath>
+            </File>
+            <File>
+              <FileName>defines.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\defines.h</FilePath>
+            </File>
+            <File>
+              <FileName>RAM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\RAM.c</FilePath>
+            </File>
+            <File>
+              <FileName>RAM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\RAM.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Timer.h</FilePath>
+            </File>
+            <File>
+              <FileName>InstructionSet.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\InstructionSet.c</FilePath>
+            </File>
+            <File>
+              <FileName>InstructionSet.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\InstructionSet.h</FilePath>
             </File>
           </Files>
         </Group>

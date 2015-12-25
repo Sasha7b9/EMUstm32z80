@@ -2,16 +2,35 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\..\src\main.c" />
-    <ClCompile Include="..\..\src\registers.c" />
     <ClCompile Include="..\..\src\RAM.c" />
     <ClCompile Include="..\..\src\Timer.c" />
-    <ClCompile Include="..\..\src\InstructionSet.c" />
+    <ClCompile Include="..\..\src\CPU\InstructionSet.c">
+      <Filter>CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\CPU\registers.c">
+      <Filter>CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\CPU\DAA.c">
+      <Filter>CPU</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\registers.h" />
     <ClInclude Include="..\..\src\defines.h" />
     <ClInclude Include="..\..\src\RAM.h" />
     <ClInclude Include="..\..\src\Timer.h" />
-    <ClInclude Include="..\..\src\InstructionSet.h" />
+    <ClInclude Include="..\..\src\CPU\InstructionSet.h">
+      <Filter>CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\CPU\registers.h">
+      <Filter>CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\CPU\DAA.h">
+      <Filter>CPU</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CPU">
+      <UniqueIdentifier>{843161e8-9842-4e95-8178-39848e7e46a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

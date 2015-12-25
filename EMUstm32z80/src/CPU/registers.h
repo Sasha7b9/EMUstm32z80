@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "defines.h"
+#include "../defines.h"
 
 
 typedef union
@@ -36,8 +36,11 @@ typedef enum
 
 
 // Return value from RAM, pointed to PC, and increment PC
+void SetPC(uint16 value);
+void AddPC(uint8 delta);
 uint8 PCandInc(void);
 uint16 PC16andInc(void);
+uint16 ValuePC(void);
 
 
 extern uint8 prevPC;
@@ -47,6 +50,10 @@ extern REGS regs;
 extern REGS regsAlt;
 extern uint8 regI;
 extern uint8 regR;
+extern uint8 iff1;
+extern uint8 iff2;
+extern uint8 imfA;
+extern uint8 imfB;
 
 
 #define BC      regs.r16[0]
@@ -67,22 +74,37 @@ extern uint8 regR;
 #define I       regI
 #define R       regR
 
-#define CY      (F & 0x01)
+#define SF      (GET_BIT(F, 7))
+#define SET_S   (SET_BIT(F, 7))
+#define RES_S   (RES_BIT(F, 7))
+#define CALC_S(value)   if(GET_BIT(value, 7)) SET_S; else RES_S
 
-#define SET_CY  (F |= 1)
-#define RESET_CY (F &= ~1)
+#define ZF      (GET_BIT(F, 6))
+#define SET_Z   (SET_BIT(F, 6))
+#define RES_Z   (RES_BIT(F, 6))
+#define CALC_Z(value)   if(value) SET_Z; else RES_Z
 
-#define SET_N   (F |= 2)
-#define RESET_N (F &= ~2)
+#define HF      (GET_BIT(F, 4))
+#define SET_H   (SET_BIT(F, 4))
+#define RES_H   (RES_BIT(F, 4))
 
-#define SET_H   (F |= (1 << 4))
-#define RESET_H (F &= ~(1 << 4))
+#define PF      (GET_BIT(F, 3))
+#define SET_P   (SET_BIT(F, 3))
+#define RES_P   (RES_BIT(F, 3))
 
-#define SET_Z   (F |= (1 << 6))
-#define RESET_Z (F &= ~(1 << 6))
+#define VF      (GET_BIT(F, 3))
+#define SET_V   (SET_BIT(F, 3))
+#define RES_V   (RES_BIT(F, 3))
 
-#define SET_S   (F |= (1 << 7))
-#define RESET_S (F &= ~(1 << 7))
+#define NF      (GET_BIT(F, 1))
+#define SET_N   (SET_BIT(F, 1))
+#define RES_N   (RES_BIT(F, 1))
+
+#define CF      (GET_BIT(F, 0))
+#define SET_C   (SET_BIT(F, 0))
+#define RES_C   (RES_BIT(F, 0))
+#define LOAD_C(value)  if(value) SET_BIT(regs.r8[6], 0); else RES_BIT(regs.r8[6], 0)
+
 
 #define Aalt    regsAlt.r8[7]
 #define Balt    regsAlt.r8[1]
@@ -97,7 +119,22 @@ extern uint8 regR;
 #define R8_LO(value)    (*funcsReg8[value & 7]())
 
 #define DD_45(value)    (*funcsRegDD[(value >> 4) & 3]())
+#define SS_45(value)    (*funcsRegDD[(value >> 4) & 3]())
 #define QQ_45(value)    (regs.r16[(value >> 4) & 3])
+
+
+#define CC(value) ((value >> 3) & 7)
+#define CC_NZ   0
+#define CC_Z    1
+#define CC_NC   2
+#define CC_C    3
+#define CC_PO   4
+#define CC_PE   5
+#define CC_P    6
+#define CC_M    7
+
+#define IFF1    iff1
+#define IFF2    iff2
 
 #define EXCH(r1, r2)    \
     temp = r1;          \

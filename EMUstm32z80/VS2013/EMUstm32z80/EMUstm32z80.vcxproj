@@ -41,6 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\My\EMUstm32z80\EMUstm32z80\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -78,17 +79,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\InstructionSet.c" />
+    <ClCompile Include="..\..\src\CPU\DAA.c" />
+    <ClCompile Include="..\..\src\CPU\InstructionSet.c" />
+    <ClCompile Include="..\..\src\CPU\registers.c" />
     <ClCompile Include="..\..\src\main.c" />
     <ClCompile Include="..\..\src\RAM.c" />
-    <ClCompile Include="..\..\src\registers.c" />
     <ClCompile Include="..\..\src\Timer.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\CPU\DAA.h" />
+    <ClInclude Include="..\..\src\CPU\InstructionSet.h" />
+    <ClInclude Include="..\..\src\CPU\registers.h" />
     <ClInclude Include="..\..\src\defines.h" />
-    <ClInclude Include="..\..\src\InstructionSet.h" />
     <ClInclude Include="..\..\src\RAM.h" />
-    <ClInclude Include="..\..\src\registers.h" />
     <ClInclude Include="..\..\src\Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
