@@ -14,9 +14,9 @@ int main(void)
 
     Timer_StartTicks();
 
-    while(true)
-    {
+//    while(true)
+//    {
         uint tackts = RunCommand();
         Timer_WaitForNTacts(tackts);
-    }
+//    }
 }
