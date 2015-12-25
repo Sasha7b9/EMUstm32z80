@@ -184,11 +184,3 @@ int RST_P(void);        // RST P        (SP-1) <- PC[HI]
 int IN_A_pN(void);      // IN A, (N)    A <- (N)
 
 int OUT_pN_A(void);     // IN (N), A    (N) <- A
-
-int RunCommandWithPrefixDD(void);
-
-int RunCommandWithPrefixFD(void);
-
-int RunCommandWithPrefixED(void);
-
-int RunCommandWithPrefixCB(void);
