@@ -145,3 +145,5 @@ extern uint8 imfB;
     temp = r1;          \
     r1 = r2;            \
     r2 = temp;
+
+char* R8_HI_Name(uint8 value);

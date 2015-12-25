@@ -28,6 +28,7 @@
     <ClCompile Include="..\..\src\CPU\instrCB.c">
       <Filter>CPU</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\defines.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\defines.h" />
