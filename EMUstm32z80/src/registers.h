@@ -49,8 +49,6 @@ extern uint8 regI;
 extern uint8 regR;
 
 
-#define CY      (regs.r8[6] & 0x01)
-
 #define BC      regs.r16[0]
 #define DE      regs.r16[1]
 #define HL      regs.r16[2]
@@ -68,6 +66,23 @@ extern uint8 regR;
 #define F       (regs.r8[6])
 #define I       regI
 #define R       regR
+
+#define CY      (F & 0x01)
+
+#define SET_CY  (F |= 1)
+#define RESET_CY (F &= ~1)
+
+#define SET_N   (F |= 2)
+#define RESET_N (F &= ~2)
+
+#define SET_H   (F |= (1 << 4))
+#define RESET_H (F &= ~(1 << 4))
+
+#define SET_Z   (F |= (1 << 6))
+#define RESET_Z (F &= ~(1 << 6))
+
+#define SET_S   (F |= (1 << 7))
+#define RESET_S (F &= ~(1 << 7))
 
 #define Aalt    regsAlt.r8[7]
 #define Balt    regsAlt.r8[1]
