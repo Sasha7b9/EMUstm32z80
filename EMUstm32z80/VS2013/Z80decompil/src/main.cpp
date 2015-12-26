@@ -36,13 +36,12 @@ int main()
 
     while(address >= 0)
     {
-        if(Decode((uint16)address) == -1)
-        {
-            base.AddErrorAddress(address);
-        }
+        bool res = Decode((uint16)address) != 0;
 
-
+        base.AddNewData(res, address, mnemonic, comment, flags, transcript, addresses, numAddresses, opCodes, numOpCodes, tackts);
 
         address = base.NextAddress();
     }
+
+    base.CreateReport();
 }

@@ -8,6 +8,11 @@
 #pragma warning(disable:4710)
 
 #include <vector>
+#include <string>
+#include <iostream>
+#include <filesystem>
+#include <iomanip>
+#include <algorithm>
 
 #pragma warning(pop)
 

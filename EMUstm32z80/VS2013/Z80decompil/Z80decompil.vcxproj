@@ -57,6 +57,7 @@
       <SDLCheck>true</SDLCheck>
       <DisableSpecificWarnings>4820;4514;4710;4350</DisableSpecificWarnings>
       <AdditionalOptions>-MP %(AdditionalOptions)</AdditionalOptions>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -82,6 +83,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Command.cpp" />
     <ClCompile Include="src\DataBase.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\RAM.c">
@@ -92,6 +94,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Command.h" />
     <ClInclude Include="src\DataBase.h" />
     <ClInclude Include="src\defines.h" />
     <ClInclude Include="src\RAM.h" />
