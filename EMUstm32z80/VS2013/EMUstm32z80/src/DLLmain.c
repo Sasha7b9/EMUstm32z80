@@ -43,7 +43,7 @@ __declspec(dllexport) BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-__declspec(dllexport) void Init
+__declspec(dllexport) void __cdecl Init
 (
     uint8 eRAM[65535],
     char eMnemonic[100],
