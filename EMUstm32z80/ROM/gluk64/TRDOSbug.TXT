@@ -1,0 +1,50 @@
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+From:    Jiøí Veleba <velesoft@seznam.cz>
+To:      Dmitry Bystrov <dmitry.alonecoder@gmail.com>
+Date:    Wednesday, February 6, 2008, 11:48:30 PM
+Subject: TRDOS
+Files:   TRD505H.ROM
+--====----====----====----====----====----====----====----====----====----===--
+Thank. Your TRDOS 6.10E and all other versions crash if I use CAT command and in message "SCROLL ?" I press key SPACE or N a use RETURN command. Only in TRDOS 5.05H is this bug fixed. Trdos contain OUT (C),A instruction, this can be used for control WD1793 ports. Is possible read this ports ?
+
+VELESOFT
+
+> ------------ Pùvodní zpráva ------------
+> Od: Dmitry Bystrov <dmitry.alonecoder@gmail.com>
+> Pøedmìt: Re: TRDOS
+> Datum: 06.2.2008 21:11:53
+> ----------------------------------------
+> Hello VELESOFT,
+>
+> Saturday, January 26, 2008, 6:49:58 PM, you wrote:
+>
+> > Hallo. Exist info about TRDOS versions and differences ?
+> You can download (uncomplete) versions tree at
+> http://alonecoder.narod.ru/zx/TRDOSES.rar
+> >  Why
+> > TRDOS version is bug-fixed (complette
+> > bugfixed trdos without ramdisc and next features).
+> As you can see, TR-DOS was bug-fixed while it was updated. No "clean"
+> bugfixed TR-DOS exist.
+> > TRDOS 5.05D is
+> > bug-fixed ?
+> I don't know this version.
+> > Source of other TRDOS
+> > versions is awailable ?
+> TR-DOS 5.04T source code without labels and with comments in Russian
+> was published by Pavel Fedin (http://trd.speccy.cz/book/TRDISASM.ZIP).
+> My version (6.10E) is based on 5.04T, and all changes were put out as
+> source files in ALASM format
+> (they are inside this archive http://alonecoder.narod.ru/zx/GLUK63SR.rar).
+>
+>
+> --
+> Best regards,
+>  Dmitry                      http://alonecoder.narod.ru
+>
+>
+>
+>
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
