@@ -14,4 +14,4 @@ __declspec(dllexport) void __cdecl Init
     int tackts[1]
     );
 
-__declspec(dllexport) void Decode(unsigned short address);
+__declspec(dllexport) int __cdecl Decode(unsigned short address);

@@ -1,4 +1,5 @@
-#include "defines.h"
+#include "stdafx.h"
+#include "DataBase.h"
 
 
 extern "C"
@@ -23,8 +24,25 @@ int numOpCodes;
 int tackts;
 
 
+DataBase base;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main()
 {
     Init(RAM, mnemonic, comment, flags, transcript, addresses, &numAddresses, opCodes, &numOpCodes, &tackts);
+
+    int address = base.NextAddress();
+
+    while(address >= 0)
+    {
+        if(Decode((uint16)address) == -1)
+        {
+            base.AddErrorAddress(address);
+        }
+
+
+
+        address = base.NextAddress();
+    }
 }

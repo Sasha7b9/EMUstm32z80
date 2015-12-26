@@ -3,9 +3,13 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\RAM.c" />
+    <ClCompile Include="src\DataBase.cpp" />
+    <ClCompile Include="src\stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\RAM.h" />
     <ClInclude Include="src\defines.h" />
+    <ClInclude Include="src\DataBase.h" />
+    <ClInclude Include="src\stdafx.h" />
   </ItemGroup>
 </Project>

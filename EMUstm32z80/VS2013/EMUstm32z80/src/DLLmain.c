@@ -76,7 +76,7 @@ __declspec(dllexport) void __cdecl Init
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-__declspec(dllexport) void Decode(uint16 address)
+__declspec(dllexport) int Decode(uint16 address)
 {
-
+    return address;
 }
