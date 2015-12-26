@@ -10,6 +10,10 @@
 #include "common.h"
 
 
+#include <string.h>
+#include <stdio.h>
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int LD_R_R(void)
 {
@@ -112,9 +116,25 @@ int LD_pNN_A(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int LD_DD_NN(void)
 {
+#ifdef LISTING
+
+    uint8 valDD = prevPC;
+    AddOpcode(RAM8(PC));
+    AddOpcode(RAM8(PC + 1));
+    AddAddress(PC + 2);
+    uint16 NN = PC16andInc();
+
+    sprintf(mnemonic, "LD %s, %4x", DD_45_Name(valDD), NN);
+
+    return -1;
+
+#else
+
     DD_45(prevPC) = PC16andInc();
 
     return 10;
+
+#endif
 }
 
 
@@ -295,9 +315,24 @@ int SUB_pHL(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int LD_HL_pNN(void)
 {
+#ifdef LISTING
+
+    AddOpcode(RAM8(PC));
+    AddOpcode(RAM8(PC + 1));
+    uint16 address = PC16andInc();
+    AddAddress(PC);
+    *tackts = 16;
+
+    sprintf(mnemonic, "LD HL, (%4x)", address);
+    sprintf(transcript, "HL<-(%4x)", address);
+
+    return -1;
+
+#else
     HL = PC16andInc();
 
     return 16;
+#endif
 }
 
 
@@ -385,9 +420,21 @@ int OR_pHL(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int XOR_S(void)
 {
-    A ^= R8_LO(prevPC);
+#ifdef LISTING
 
+    sprintf(mnemonic, "XOR %s", R8_HI_Name(prevPC));
+    sprintf(transcript, "A<-A(+)%s", R8_HI_Name(prevPC));
+    strcpy(flags, "++X0XP00");
+    *tackts = 4;
+    AddAddress(PC);
+    return -1;
+
+#else
+
+    A ^= R8_LO(prevPC);
     return 4;
+
+#endif
 }
 
 
@@ -591,10 +638,23 @@ int HALT(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int DI(void)
 {
+#ifdef LISTING
+
+    strcpy(mnemonic, "DI");
+    strcpy(transcript, "IFF1<-0, IFF2<-0");
+    strcpy(comment, "reset the maskable interrupt");
+    *tackts = 4;
+
+    AddAddress(PC);
+
+    return -1;
+
+#else
     IFF1 = 0;
     IFF2 = 0;
 
     return 4;
+#endif
 }
 
 
@@ -715,9 +775,29 @@ int RRA(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int JP_NN(void)
 {
+#ifdef LISTING
+
+    AddOpcode(RAM8(PC));
+    AddOpcode(RAM8(PC + 1));
+
+    uint16 address = PC16andInc();
+
+    AddAddress(address);
+
+    sprintf(mnemonic, "JP %4x", address);
+    sprintf(transcript, "PC<-%4x", address);
+
+    *tackts = 10;
+
+    return -1;
+
+#else
+
     PC = PC16andInc();
 
     return 10;
+
+#endif
 }
 
 
@@ -1258,6 +1338,8 @@ int RunCommand(void)
         /*   11 111 110   */ CP_N,
         /*   11 111 111   */ RST_P
     };
+
+    AddOpcode(RAM8(PC));
 
     return firstLevel[PCandInc()]();
 }

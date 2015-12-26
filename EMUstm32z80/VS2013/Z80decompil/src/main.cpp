@@ -5,7 +5,7 @@
 extern "C"
 {
     #include "DLLmain.h"
-    #include "RAM.h"
+    #include "RAM48.h"
 }
 
 
@@ -30,7 +30,7 @@ DataBase base;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main()
 {
-    Init(RAM, mnemonic, comment, flags, transcript, addresses, &numAddresses, opCodes, &numOpCodes, &tackts);
+    Init(RAM48, mnemonic, comment, flags, transcript, addresses, &numAddresses, opCodes, &numOpCodes, &tackts);
 
     int address = base.NextAddress();
 

@@ -25,4 +25,5 @@ private:
     void AddScanAddress(int address);
     bool AddressAlreadyScanOrFuture(int address);
     void WriteCommand(std::ofstream &file, Command &command);
+    void WriteBinaryByte(std::ofstream &file, int value);
 };

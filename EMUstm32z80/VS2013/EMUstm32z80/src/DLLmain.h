@@ -11,7 +11,7 @@ __declspec(dllexport) void __cdecl Init
     int *numAddresses,
     unsigned char opCodes[10],
     int *numOpCodes,
-    int tackts[1]
+    int *tackts
     );
 
 __declspec(dllexport) int __cdecl Decode(unsigned short address);

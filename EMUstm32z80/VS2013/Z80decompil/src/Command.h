@@ -12,6 +12,7 @@ public:
     std::string transcript;
     std::string flags;
     std::string comment;
+    int tackts = 0;
 
     bool operator<(const Command &first);
 };

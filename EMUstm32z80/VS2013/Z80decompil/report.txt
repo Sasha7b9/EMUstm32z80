@@ -1,5 +1,14 @@
-0 ERROR!!! BAD COMMAND!!! ERROR!!!
+0000 | f3 | 11 110 011 | DI          | IFF1<-0, IFF2<-0 |          | 4  | reset the maskable interrupt
+0001 | af | 10 101 111 | XOR L       | A<-A(+)L         | ++X0XP00 | 4  | 
+0002 | 11 | 00 010 001 | LD DE, ffff |                  |          | 0  | 
+     | ff | 11 111 111 |
+     | ff | 11 111 111 |
+0005 | c3 | 11 000 011 | JP 11cb     | PC<-11cb         |          | 10 | 
+     | cb | 11 001 011 |
+     | 11 | 00 010 001 |
+
+11cb | 47 | 01 000 111 | ERROR!!! BAD COMMAND!!! ERROR!!!
 
 
  ***** BAD ADDRESSES *****
-0 ERROR!!! BAD COMMAND!!! ERROR!!!
+11cb | 47 | 01 000 111 | ERROR!!! BAD COMMAND!!! ERROR!!!

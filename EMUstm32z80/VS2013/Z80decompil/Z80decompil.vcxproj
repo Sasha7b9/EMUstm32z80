@@ -86,7 +86,7 @@
     <ClCompile Include="src\Command.cpp" />
     <ClCompile Include="src\DataBase.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\RAM.c">
+    <ClCompile Include="src\RAM48.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\stdafx.cpp">
@@ -97,7 +97,7 @@
     <ClInclude Include="src\Command.h" />
     <ClInclude Include="src\DataBase.h" />
     <ClInclude Include="src\defines.h" />
-    <ClInclude Include="src\RAM.h" />
+    <ClInclude Include="src\RAM48.h" />
     <ClInclude Include="src\stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

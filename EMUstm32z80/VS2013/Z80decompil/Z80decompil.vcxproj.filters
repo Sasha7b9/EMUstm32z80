@@ -2,16 +2,16 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\RAM.c" />
     <ClCompile Include="src\DataBase.cpp" />
     <ClCompile Include="src\stdafx.cpp" />
     <ClCompile Include="src\Command.cpp" />
+    <ClCompile Include="src\RAM48.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\RAM.h" />
     <ClInclude Include="src\defines.h" />
     <ClInclude Include="src\DataBase.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\Command.h" />
+    <ClInclude Include="src\RAM48.h" />
   </ItemGroup>
 </Project>

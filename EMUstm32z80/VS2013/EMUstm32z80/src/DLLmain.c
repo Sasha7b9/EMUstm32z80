@@ -10,6 +10,7 @@
 
 
 #include "CPU/instr.h"
+#include "CPU/registers.h"
 
 
 uint8 *RAM;
@@ -54,7 +55,7 @@ __declspec(dllexport) void __cdecl Init
     int *eNumAddresses,
     uint8 eOpCodes[10],
     int *eNumOpCodes,
-    int eTackts[1]
+    int *eTackts
 )
 {
     RAM = eRAM;
@@ -65,11 +66,9 @@ __declspec(dllexport) void __cdecl Init
 
     addresses = eAddresses;
     numAddresses = eNumAddresses;
-    *numAddresses = 0;
 
     opCodes = eOpCodes;
     numOpCodes = eNumOpCodes;
-    *numOpCodes = 0;
 
     tackts = eTackts;
 }
@@ -78,5 +77,15 @@ __declspec(dllexport) void __cdecl Init
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 __declspec(dllexport) int Decode(uint16 address)
 {
-    return address;
+    *numAddresses = 0;
+    *numOpCodes = 0;
+    *transcript = 0;
+    *flags = 0;
+    *tackts = 0;
+    *comment = 0;
+
+    PC = address;
+
+    // If RunCommand() return >= 0, decoding fail
+    return (RunCommand() < 0) ? 1 : 0;
 }

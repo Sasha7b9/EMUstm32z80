@@ -11,7 +11,8 @@ extern uint16 *addresses;
 extern int *numAddresses;
 extern uint8 *opCodes;
 extern int *numOpCodes;
-extern int tackts[1];
+extern int *tackts;
 
 
-void AddAddress(uint16);
+void AddAddress(uint16 address);
+void AddOpcode(uint8 code);
