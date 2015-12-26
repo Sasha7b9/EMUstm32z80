@@ -25,7 +25,22 @@ int LD_A_I(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int LD_I_A(void)
 {
+#ifdef LISTING
+
+    *tackts = 9;
+    AddAddress(PC);
+
+    strcpy(mnemonic, "LD I,A");
+    strcpy(transcript, "I<-A");
+    strcpy(comment, "I - Interrupt Control Vector Register");
+
+    return -1;
+
+#else
+
     return 9;   // WARN
+
+#endif
 }
 
 
@@ -55,9 +70,28 @@ int LD_DD_pNN(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int LD_pNN_DD(void)
 {
+#ifdef LISTING
+
+    *tackts = 20;
+
+    uint8 valDD = prevPC;
+    AddOpcode(RAM8(PC));
+    AddOpcode(RAM8(PC + 1));
+    uint16 address = PC16andInc();
+    AddAddress(PC);
+
+    sprintf(mnemonic, "LD (%4x),%s", address, DD_45_Name(valDD));
+    sprintf(transcript, "(%4x)<-%s", address, DD_45_Name(prevPC));
+
+    return -1;
+
+#else
+
     uint valDD = prevPC;
-    DD_45(valDD) = RAM16(PC16andInc());
+    RAM16(PC16andInc()) = DD_45(valDD);
     return 20;
+
+#endif
 }
 
 
@@ -234,6 +268,17 @@ int ADC_HL_SS(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int SBC_HL_SS(void)
 {
+#ifdef LISTING
+
+    *tackts = 15;
+    AddAddress(PC);
+    strcpy(flags, "++XXXV1+");
+    sprintf(mnemonic, "SBC HL,%s", SS_45_Name(prevPC));
+    sprintf(transcript, "HL<-HL-%s-CY", SS_45_Name(prevPC));
+    return -1;
+
+#else
+
     HL -= SS_45(prevPC) - CF;
 
     // + + x x x V 1 +
@@ -244,6 +289,8 @@ int SBC_HL_SS(void)
     // C
 
     return 15;
+
+#endif
 }
 
 
@@ -693,6 +740,8 @@ int RunCommandWithPrefixED(void)
         /*   11 111 110   */ 0,
         /*   11 111 111   */ 0
     };
+
+    AddOpcode(RAM8(PC));
 
     return secondLevel[PCandInc()]();
 }

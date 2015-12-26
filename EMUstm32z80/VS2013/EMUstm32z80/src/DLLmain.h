@@ -7,7 +7,7 @@ __declspec(dllexport) void __cdecl Init
     char comment[100],
     char flags[100],
     char transcript[100],
-    unsigned short addresses[10],
+    unsigned int addresses[10],
     int *numAddresses,
     unsigned char opCodes[10],
     int *numOpCodes,

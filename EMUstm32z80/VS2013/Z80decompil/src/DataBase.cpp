@@ -12,6 +12,13 @@ using std::endl;
 DataBase::DataBase()
 {
     addressesForScan.push_back(0);
+    addressesForScan.push_back(8);
+    addressesForScan.push_back(0x10);
+    addressesForScan.push_back(0x18);
+    addressesForScan.push_back(0x20);
+    addressesForScan.push_back(0x28);
+    addressesForScan.push_back(0x30);
+    addressesForScan.push_back(0x38);
 }
 
 
@@ -27,7 +34,7 @@ int DataBase::NextAddress()
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-void DataBase::AddNewData(bool succsefull, int address, char mnemonic[100], char comment[100], char flags[100], char transcript[100], uint16 addresses[10],
+void DataBase::AddNewData(bool succsefull, int address, char mnemonic[100], char comment[100], char flags[100], char transcript[100], uint addresses[10],
                           int numAddresses, uint8 opCodes[10], int numOpCodes, int tackts)
 {
     RemoveScanAddress(address);
@@ -49,7 +56,7 @@ void DataBase::AddNewData(bool succsefull, int address, char mnemonic[100], char
 
         for(int i = 0; i < numAddresses; i++)
         {
-            AddScanAddress(addresses[i]);
+            AddScanAddress((int)addresses[i]);
         }
 
         command.transcript = string(transcript);
@@ -147,7 +154,7 @@ void DataBase::WriteCommand(ofstream &file, Command &command)
 {
     file << std::right << std::hex << std::setw(4) << std::setfill('0') << command.address << " | ";
 
-   file << std::hex << (int)command.opCodes[0] << " | ";
+   file << std::hex << std::setw(2) << std::setfill('0') << std::right << (int)command.opCodes[0] << " | ";
    WriteBinaryByte(file, (int)command.opCodes[0]);
    file << " | ";
 
@@ -157,14 +164,15 @@ void DataBase::WriteCommand(ofstream &file, Command &command)
     }
     else
     {
-        file << std::setw(11) << std::left << std::setfill(' ') << command.mnemonic << " | ";
+        file << std::setw(14) << std::left << std::setfill(' ') << command.mnemonic;
+        /*
         if(!command.transcript.empty())
         {
-            file << std::setw(16) << command.transcript << " | ";
+            file << std::setw(20) << command.transcript << " | ";
         }
         else
         {
-            file << "                 | ";
+            file << "                     | ";
         }
         if(!command.flags.empty())
         {
@@ -175,19 +183,21 @@ void DataBase::WriteCommand(ofstream &file, Command &command)
             file << "         | ";
         }
         file << std::dec << std::setw(2) << command.tackts << " | ";
+        */
         if(!command.comment.empty())
         {
-            file << command.comment;
-        }
-
-        for(uint i = 1; i < command.opCodes.size(); i++)
-        {
-            file << endl <<  "     | ";
-            file << std::hex << (int)command.opCodes[i] << " | ";
-            WriteBinaryByte(file, (int)command.opCodes[i]);
-            file << " |";
+            file << " | " <<  command.comment;
         }
     }
+
+    for(uint i = 1; i < command.opCodes.size(); i++)
+    {
+        file << endl << "     | ";
+        file << std::hex << std::setw(2) << std::setfill('0') << std::right << (int)command.opCodes[i] << " | ";
+        WriteBinaryByte(file, (int)command.opCodes[i]);
+        file << " |";
+    }
+
     file << endl;
 }
 
@@ -209,9 +219,9 @@ void DataBase::CreateReport()
         if(i < commands.size() - 1)
         {
             int addressNext = commands[i + 1].address;
-            if((addressNext - commands[i].address) > commands[i].opCodes.size())
+            if((addressNext - commands[i].address) > (int)commands[i].opCodes.size())
             {
-                file << endl;
+                file << "--------------------------------------------------------------------------------------------------------------" << endl;
             }
         }
     }

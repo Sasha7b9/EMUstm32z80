@@ -13,7 +13,7 @@ public:
     int NextAddress();
 
     void AddNewData(bool succsefull, int address, char mnemonic[100], char comment[100], char flags[100], char transcript[100],
-                    uint16 addresses[10], int numAddresses, uint8 opCodes[10], int numOpCodes, int tackts);
+                    uint addresses[10], int numAddresses, uint8 opCodes[10], int numOpCodes, int tackts);
 
     void CreateReport();
 

@@ -18,7 +18,7 @@ char *mnemonic;
 char *comment;
 char *flags;
 char *transcript;
-uint16 *addresses;
+uint *addresses;
 int *numAddresses;
 uint8 *opCodes;
 int *numOpCodes;
@@ -51,7 +51,7 @@ __declspec(dllexport) void __cdecl Init
     char eComment[100],
     char eFlags[100],
     char eTranscript[100],
-    uint16 eAddresses[10],
+    uint eAddresses[10],
     int *eNumAddresses,
     uint8 eOpCodes[10],
     int *eNumOpCodes,

@@ -7,12 +7,12 @@ extern char *mnemonic;
 extern char *comment;
 extern char *flags;
 extern char *transcript;
-extern uint16 *addresses;
+extern uint *addresses;
 extern int *numAddresses;
 extern uint8 *opCodes;
 extern int *numOpCodes;
 extern int *tackts;
 
 
-void AddAddress(uint16 address);
+void AddAddress(uint address);
 void AddOpcode(uint8 code);
