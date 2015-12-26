@@ -28,9 +28,9 @@
       <Filter>CPU</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\defines.c" />
-    <ClCompile Include="..\..\src\DLLmain.c" />
     <ClCompile Include="..\..\src\RAM.c" />
-    <ClCompile Include="..\..\src\common.c" />
+    <ClCompile Include="src\common.c" />
+    <ClCompile Include="src\DLLmain.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\defines.h" />
@@ -59,9 +59,9 @@
     <ClInclude Include="..\..\src\CPU\instrCB.h">
       <Filter>CPU</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\DLLmain.h" />
-    <ClInclude Include="..\..\src\common.h" />
     <ClInclude Include="..\..\src\RAM.h" />
+    <ClInclude Include="src\common.h" />
+    <ClInclude Include="src\DLLmain.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CPU">

@@ -5,6 +5,11 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EMUstm32z80", "EMUstm32z80.vcxproj", "{F55C0B22-9659-4946-86D7-01A5F858561E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Z80decompil", "..\Z80decompil\Z80decompil.vcxproj", "{9E2AA5DB-38D6-4DE2-B90D-AB9AF16BCD38}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F55C0B22-9659-4946-86D7-01A5F858561E} = {F55C0B22-9659-4946-86D7-01A5F858561E}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +20,10 @@ Global
 		{F55C0B22-9659-4946-86D7-01A5F858561E}.Debug|Win32.Build.0 = Debug|Win32
 		{F55C0B22-9659-4946-86D7-01A5F858561E}.Release|Win32.ActiveCfg = Release|Win32
 		{F55C0B22-9659-4946-86D7-01A5F858561E}.Release|Win32.Build.0 = Release|Win32
+		{9E2AA5DB-38D6-4DE2-B90D-AB9AF16BCD38}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9E2AA5DB-38D6-4DE2-B90D-AB9AF16BCD38}.Debug|Win32.Build.0 = Debug|Win32
+		{9E2AA5DB-38D6-4DE2-B90D-AB9AF16BCD38}.Release|Win32.ActiveCfg = Release|Win32
+		{9E2AA5DB-38D6-4DE2-B90D-AB9AF16BCD38}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,7 +10,7 @@ for i in range (16384 // 16):
     fileOut.write("   ")
     for j in range (16):
         value = struct.unpack('@B', file.read(1))
-        fileOut.write("  " + str(value[0]) + ",")
+        fileOut.write("  " + str(hex(value[0])) + ",")
     fileOut.write("\n")
 
 fileOut.write("};\n")

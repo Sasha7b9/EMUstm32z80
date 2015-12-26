@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "../defines.h"
+#include "defines.h"
 
 
 int RunCommand(void);

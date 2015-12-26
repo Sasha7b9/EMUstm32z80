@@ -11,13 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F55C0B22-9659-4946-86D7-01A5F858561E}</ProjectGuid>
+    <ProjectGuid>{9E2AA5DB-38D6-4DE2-B90D-AB9AF16BCD38}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>EMUstm32z80</RootNamespace>
+    <RootNamespace>Z80decompil</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -41,8 +41,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\My\EMUstm32z80\EMUstm32z80\VS2013\EMUstm32z80\src;C:\My\EMUstm32z80\EMUstm32z80\src;$(IncludePath)</IncludePath>
     <OutDir>..\Debug\</OutDir>
+    <IncludePath>C:\My\EMUstm32z80\EMUstm32z80\VS2013\EMUstm32z80\src;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\My\EMUstm32z80\EMUstm32z80\VS2013\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -53,10 +54,8 @@
       </PrecompiledHeader>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;LISTING;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <DisableSpecificWarnings>
-      </DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -82,38 +81,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\CPU\DAA.c" />
-    <ClCompile Include="..\..\src\CPU\instr.c" />
-    <ClCompile Include="..\..\src\CPU\instrCB.c" />
-    <ClCompile Include="..\..\src\CPU\instrDD.c" />
-    <ClCompile Include="..\..\src\CPU\instrED.c" />
-    <ClCompile Include="..\..\src\CPU\instrFD.c" />
-    <ClCompile Include="..\..\src\CPU\registers.c" />
-    <ClCompile Include="..\..\src\defines.c" />
-    <ClCompile Include="..\..\src\Hardware\ports.c" />
-    <ClCompile Include="..\..\src\main.c" />
-    <ClCompile Include="..\..\src\RAM.c" />
-    <ClCompile Include="..\..\src\Timer.c" />
-    <ClCompile Include="src\common.c" />
-    <ClCompile Include="src\DLLmain.c" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\RAM.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\CPU\DAA.h" />
-    <ClInclude Include="..\..\src\CPU\instr.h" />
-    <ClInclude Include="..\..\src\CPU\instrCB.h" />
-    <ClInclude Include="..\..\src\CPU\instrDD.h" />
-    <ClInclude Include="..\..\src\CPU\instrED.h" />
-    <ClInclude Include="..\..\src\CPU\instrFD.h" />
-    <ClInclude Include="..\..\src\CPU\registers.h" />
-    <ClInclude Include="..\..\src\defines.h" />
-    <ClInclude Include="..\..\src\Hardware\ports.h" />
-    <ClInclude Include="..\..\src\RAM.h" />
-    <ClInclude Include="..\..\src\Timer.h" />
-    <ClInclude Include="src\common.h" />
-    <ClInclude Include="src\DLLmain.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\..\src\doc\interface.txt" />
+    <ClInclude Include="src\defines.h" />
+    <ClInclude Include="src\RAM.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
