@@ -1,9 +1,8 @@
 #include "instrDD.h"
-
-
 #include "defines.h"
 #include "registers.h"
 #include "RAM.h"
+#include "common.h"
 
 
 

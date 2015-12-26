@@ -1,0 +1,15 @@
+
+
+void Init
+{
+    uit8 RAM[65535];
+    char mnemonic[100];
+    char commen[100];
+    char flags[100];
+    char transcript[100];
+    void(*pFuncAddAddress)(uint16);
+    void(*pFuncAddOpcode)(uint8);
+    void(*pFuncSetTackts)(int);
+}
+
+void Decode(uint16 address);

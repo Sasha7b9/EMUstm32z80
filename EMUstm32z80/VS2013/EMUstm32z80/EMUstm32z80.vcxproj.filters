@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\..\src\main.c" />
-    <ClCompile Include="..\..\src\RAM.c" />
     <ClCompile Include="..\..\src\Timer.c" />
     <ClCompile Include="..\..\src\CPU\registers.c">
       <Filter>CPU</Filter>
@@ -29,10 +28,12 @@
       <Filter>CPU</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\defines.c" />
+    <ClCompile Include="..\..\src\DLLmain.c" />
+    <ClCompile Include="..\..\src\RAM.c" />
+    <ClCompile Include="..\..\src\common.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\defines.h" />
-    <ClInclude Include="..\..\src\RAM.h" />
     <ClInclude Include="..\..\src\Timer.h" />
     <ClInclude Include="..\..\src\CPU\registers.h">
       <Filter>CPU</Filter>
@@ -58,6 +59,9 @@
     <ClInclude Include="..\..\src\CPU\instrCB.h">
       <Filter>CPU</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\DLLmain.h" />
+    <ClInclude Include="..\..\src\common.h" />
+    <ClInclude Include="..\..\src\RAM.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CPU">
@@ -66,5 +70,13 @@
     <Filter Include="Hardware">
       <UniqueIdentifier>{061576ba-2a6e-473b-8485-d4a6e07bf0dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="doc">
+      <UniqueIdentifier>{d3082842-20a2-4b08-9569-7bb86401282b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\src\doc\interface.txt">
+      <Filter>doc</Filter>
+    </Text>
   </ItemGroup>
 </Project>

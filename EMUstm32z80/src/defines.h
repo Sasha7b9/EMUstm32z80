@@ -37,18 +37,3 @@ typedef bool(*pFuncBV)(void);
 #define LOAD_BIT(value, bit, vBit) if(vBit) ((value) |= (1 << bit)); else ((value) &= (~(1 << bit)))
 
 #define LOG_ERROR()
-
-
-extern uint16 address;
-
-extern char mnemonic[100];
-extern char comment[100];
-extern char flags[100];
-extern char transcript[100];
-extern uint16 addressesNext[2];
-
-extern uint8 opCode[10];
-extern int posOpCode;
-
-
-void AddAddress(uint16 address);

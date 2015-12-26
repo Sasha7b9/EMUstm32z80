@@ -17,7 +17,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -54,6 +54,8 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;LISTING;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -79,6 +81,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\common.c" />
     <ClCompile Include="..\..\src\CPU\DAA.c" />
     <ClCompile Include="..\..\src\CPU\instr.c" />
     <ClCompile Include="..\..\src\CPU\instrCB.c" />
@@ -87,12 +90,14 @@
     <ClCompile Include="..\..\src\CPU\instrFD.c" />
     <ClCompile Include="..\..\src\CPU\registers.c" />
     <ClCompile Include="..\..\src\defines.c" />
+    <ClCompile Include="..\..\src\DLLmain.c" />
     <ClCompile Include="..\..\src\Hardware\ports.c" />
     <ClCompile Include="..\..\src\main.c" />
     <ClCompile Include="..\..\src\RAM.c" />
     <ClCompile Include="..\..\src\Timer.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\common.h" />
     <ClInclude Include="..\..\src\CPU\DAA.h" />
     <ClInclude Include="..\..\src\CPU\instr.h" />
     <ClInclude Include="..\..\src\CPU\instrCB.h" />
@@ -101,9 +106,13 @@
     <ClInclude Include="..\..\src\CPU\instrFD.h" />
     <ClInclude Include="..\..\src\CPU\registers.h" />
     <ClInclude Include="..\..\src\defines.h" />
+    <ClInclude Include="..\..\src\DLLmain.h" />
     <ClInclude Include="..\..\src\Hardware\ports.h" />
     <ClInclude Include="..\..\src\RAM.h" />
     <ClInclude Include="..\..\src\Timer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\src\doc\interface.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

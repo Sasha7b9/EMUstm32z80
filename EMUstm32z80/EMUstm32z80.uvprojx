@@ -472,16 +472,6 @@
           <GroupName>CPU</GroupName>
           <Files>
             <File>
-              <FileName>InstructionSet.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\CPU\InstructionSet.c</FilePath>
-            </File>
-            <File>
-              <FileName>InstructionSet.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\CPU\InstructionSet.h</FilePath>
-            </File>
-            <File>
               <FileName>registers.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\CPU\registers.c</FilePath>
@@ -501,10 +491,72 @@
               <FileType>5</FileType>
               <FilePath>.\src\CPU\DAA.h</FilePath>
             </File>
+            <File>
+              <FileName>instr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\CPU\instr.c</FilePath>
+            </File>
+            <File>
+              <FileName>instr.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\CPU\instr.h</FilePath>
+            </File>
+            <File>
+              <FileName>instrCB.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\CPU\instrCB.c</FilePath>
+            </File>
+            <File>
+              <FileName>instrCB.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\CPU\instrCB.h</FilePath>
+            </File>
+            <File>
+              <FileName>instrDD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\CPU\instrDD.c</FilePath>
+            </File>
+            <File>
+              <FileName>instrDD.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\CPU\instrDD.h</FilePath>
+            </File>
+            <File>
+              <FileName>instrED.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\CPU\instrED.c</FilePath>
+            </File>
+            <File>
+              <FileName>instrED.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\CPU\instrED.h</FilePath>
+            </File>
+            <File>
+              <FileName>instrFD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\CPU\instrFD.c</FilePath>
+            </File>
+            <File>
+              <FileName>instrFD.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\CPU\instrFD.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Hardware</GroupName>
+          <Files>
+            <File>
+              <FileName>ports.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Hardware\ports.c</FilePath>
+            </File>
+            <File>
+              <FileName>ports.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\ports.h</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>

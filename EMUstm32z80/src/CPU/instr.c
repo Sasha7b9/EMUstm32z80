@@ -1,12 +1,13 @@
 #include "instr.h"
 #include "registers.h"
-#include "../RAM.h"
+#include "RAM.h"
 #include "DAA.h"
 #include "Hardware/ports.h"
 #include "instrCB.h"
 #include "instrDD.h"
 #include "instrED.h"
 #include "instrFD.h"
+#include "common.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
