@@ -160,7 +160,7 @@ void DataBase::WriteCommand(ofstream &file, Command &command)
 
     if(command.bad)
     {
-        file << "ERROR!!! BAD COMMAND!!! ERROR!!!";
+        file << "ERROR!!! BAD COMMAND!!! ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
     }
     else
     {

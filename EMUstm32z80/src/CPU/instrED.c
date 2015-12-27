@@ -61,9 +61,26 @@ int LD_R_A(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int LD_DD_pNN(void)
 {
+#ifdef LISTING
+
+    AddOpcode(RAM8(PC));
+    AddOpcode(RAM8(PC + 1));
+
+    uint8 retValue = prevPC;
+
+    sprintf(mnemonic, "LD %s,(%04x)", DD_45_Name(retValue), PC16andInc());
+
+    AddAddress(PC);
+
+    return -1;
+
+#else
+
     uint8 valReg = prevPC;
     DD_45(valReg) = RAM16(PC16andInc());
     return 20;
+
+#endif
 }
 
 
@@ -109,6 +126,14 @@ int LDI(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int LDIR(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    strcpy(mnemonic, "LDIR");
+    return -1;
+
+#else
+
     int time = 0;
     do
     {
@@ -117,6 +142,8 @@ int LDIR(void)
     } while(BC != 0);
 
     return time + 16;
+
+#endif
 }
 
 
@@ -134,6 +161,14 @@ int LDD(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int LDDR(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    sprintf(mnemonic, "LDDR");
+    return -1;
+
+#else
+
     int time = 0;
 
     do
@@ -143,6 +178,8 @@ int LDDR(void)
     } while(BC != 0);
 
     return time += 16;
+
+#endif
 }
 
 
@@ -238,7 +275,17 @@ int IM0(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int IM1(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    strcpy(mnemonic, "IM1");
+    return -1;
+
+#else
+
     return 8;   // WARN
+
+#endif
 }
 
 
@@ -643,7 +690,7 @@ int RunCommandWithPrefixED(void)
         /*   10 011 101   */ 0,
         /*   10 011 110   */ 0,
         /*   10 011 111   */ 0,
-        /*   10 100 000   */ LDI,
+        /*   10 100 000   */ LDIR,
         /*   10 100 001   */ CPI,
         /*   10 100 010   */ INI,
         /*   10 100 011   */ 0,
@@ -659,7 +706,7 @@ int RunCommandWithPrefixED(void)
         /*   10 101 101   */ 0,
         /*   10 101 110   */ 0,
         /*   10 101 111   */ 0,
-        /*   10 110 000   */ 0,
+        /*   10 110 000   */ LDIR,
         /*   10 110 001   */ CPIR,
         /*   10 110 010   */ INIR,
         /*   10 110 011   */ 0,
@@ -723,7 +770,7 @@ int RunCommandWithPrefixED(void)
         /*   11 101 101   */ 0,
         /*   11 101 110   */ 0,
         /*   11 101 111   */ 0,
-        /*   11 110 000   */ LDIR,
+        /*   11 110 000   */ 0,
         /*   11 110 001   */ 0,
         /*   11 110 010   */ 0,
         /*   11 110 011   */ 0,
@@ -743,5 +790,12 @@ int RunCommandWithPrefixED(void)
 
     AddOpcode(RAM8(PC));
 
-    return secondLevel[PCandInc()]();
+    int index = PCandInc();
+
+    if(secondLevel[index] == 0)
+    {
+        return 0;
+    }
+
+    return secondLevel[index]();
 }

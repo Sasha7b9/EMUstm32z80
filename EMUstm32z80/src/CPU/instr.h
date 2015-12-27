@@ -21,7 +21,7 @@ int LD_A_pBC(void);
 
 int LD_A_pDE(void);
 
-int LD_A_NN(void);
+int LD_A_pNN(void);
 
 int LD_pBC_A(void);
 
