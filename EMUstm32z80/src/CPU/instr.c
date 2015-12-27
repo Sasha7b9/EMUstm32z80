@@ -492,9 +492,20 @@ int SUB_S(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int SUB_N(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC + 1);
+    AddOpcode(RAM8(PC));
+    sprintf(mnemonic, "SUB %02X", PCandInc());
+    return -1;
+
+#else
+
     A -= PCandInc();
 
     return 7;
+
+#endif
 }
 
 
@@ -585,9 +596,20 @@ int AND_S(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int AND_N(void)
 {
+#ifdef LISTING
+
+    AddOpcode(RAM8(PC));
+    AddAddress(PC + 1);
+    sprintf(mnemonic, "AND %02X", PCandInc());
+    return -1;
+
+#else
+
     A &= PCandInc();
 
     return 7;
+
+#endif
 }
 
 
@@ -663,9 +685,20 @@ int XOR_S(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int XOR_N(void)
 {
+#ifdef LISTING
+
+    AddOpcode(RAM8(PC));
+    AddAddress(PC + 1);
+    sprintf(mnemonic, "XOR %02X", PCandInc());
+    return -1;
+
+#else
+
     A ^= PCandInc();
 
     return 7;
+
+#endif
 }
 
 
@@ -757,7 +790,17 @@ int CP_N(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int CP_pHL(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    strcpy(mnemonic, "CP [HL]");
+    return -1;
+
+#else
+
     return 7;
+
+#endif
 }
 
 
@@ -861,6 +904,14 @@ int DEC_pHL(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int CPL(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    sprintf(mnemonic, "CPL");
+    return -1;
+
+#else
+
     A = ~A;
 
     // . . x + x . 1 .
@@ -870,6 +921,8 @@ int CPL(void)
     SET_N;
 
     return 4;
+
+#endif
 }
 
 
@@ -1128,6 +1181,14 @@ int RLA(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int RRCA(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    strcpy(mnemonic, "RRCA");
+    return -1;
+
+#else
+
     uint8 loBit = GET_BIT(A, 0);
 
     A >>= 1;
@@ -1135,10 +1196,12 @@ int RRCA(void)
     LOAD_C(loBit);
 
     // . . x 0 x . 0 +
-    RES_H;  
+    RES_H;
     RES_N;
 
     return 4;
+
+#endif
 }
 
 

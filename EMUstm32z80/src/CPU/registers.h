@@ -151,3 +151,4 @@ char* R8_LO_Name(uint8 value);
 char* DD_45_Name(uint8 value);
 char* SS_45_Name(uint8 value);
 char* QQ_45_Name(uint8 value);
+char* PP_45_Name(uint8 value);

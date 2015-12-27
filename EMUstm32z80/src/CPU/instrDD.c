@@ -5,6 +5,9 @@
 #include "common.h"
 
 
+#include <string.h>
+
+#include <stdio.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int LD_R_pIX_D(void)
@@ -41,8 +44,20 @@ int LD_pIX_D_N(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int LD_IX_NN(void)
 {
+#ifdef LISTING
+
+    AddOpcode(RAM8(PC));
+    AddOpcode(RAM8(PC));
+    AddAddress(PC + 2);
+    sprintf(mnemonic, "LD IX,%04X", PC16andInc());
+    return -1;
+
+#else
+
     IX = PC16andInc();
     return 14;
+
+#endif
 }
 
 
@@ -116,10 +131,19 @@ int INC_pIX_D(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int ADD_IX_PP(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    sprintf(mnemonic, "ADD IX,%s", PP_45_Name(prevPC));
+    return -1;
+
+#else
+
     IX += PP_45(prevPC);
     return 15;
-}
 
+#endif
+}
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int DEC_IX(void)
@@ -193,7 +217,7 @@ int RunCommandWithPrefixDD(void)
         /*   00 000 110   */ 0,
         /*   00 000 111   */ 0,
         /*   00 001 000   */ 0,
-        /*   00 001 001   */ 0,
+        /*   00 001 001   */ ADD_IX_PP,
         /*   00 001 010   */ 0,
         /*   00 001 011   */ 0,
         /*   00 001 100   */ 0,
@@ -209,7 +233,7 @@ int RunCommandWithPrefixDD(void)
         /*   00 010 110   */ 0,
         /*   00 010 111   */ 0,
         /*   00 011 000   */ 0,
-        /*   00 011 001   */ 0,
+        /*   00 011 001   */ ADD_IX_PP,
         /*   00 011 010   */ 0,
         /*   00 011 011   */ 0,
         /*   00 011 100   */ 0,
@@ -225,7 +249,7 @@ int RunCommandWithPrefixDD(void)
         /*   00 100 110   */ 0,
         /*   00 100 111   */ 0,
         /*   00 101 000   */ 0,
-        /*   00 101 001   */ 0,
+        /*   00 101 001   */ ADD_IX_PP,
         /*   00 101 010   */ LD_IX_pNN,
         /*   00 101 011   */ DEC_IX,
         /*   00 101 100   */ 0,
@@ -241,7 +265,7 @@ int RunCommandWithPrefixDD(void)
         /*   00 110 110   */ LD_pIX_D_N,
         /*   00 110 111   */ 0,
         /*   00 111 000   */ 0,
-        /*   00 111 001   */ 0,
+        /*   00 111 001   */ ADD_IX_PP,
         /*   00 111 010   */ 0,
         /*   00 111 011   */ 0,
         /*   00 111 100   */ 0,
@@ -442,5 +466,14 @@ int RunCommandWithPrefixDD(void)
         /*   11 111 111   */ 0
     };
 
-    return secondLevel[PCandInc()]();
+    AddOpcode(RAM8(PC));
+
+    int index = PCandInc();
+
+    if(secondLevel[index] == 0)
+    {
+        return 0;
+    }
+
+    return secondLevel[index]();
 }

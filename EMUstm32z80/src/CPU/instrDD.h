@@ -36,3 +36,5 @@ int DEC_IX(void);       // DEC IX
 int RLC_pIX_D_and_BIT_B_pIX_D_and_SET_B_pIX_D(void);    // RLC (IX + D) and BIT B, (IX + D) and SET B, (IX + D)
 
 int JP_pIX(void);       // JP (IX)
+
+int ADD_IX_PP(void);
