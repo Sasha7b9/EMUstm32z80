@@ -16,3 +16,5 @@ int SET_B_pIY_D_RES_pIY_D_BIT_B_pIY_D(void);
 int LD_pIY_D_N(void);
 
 int SUB_pIY_D(void);
+
+int LD_R_pIY_D(void);

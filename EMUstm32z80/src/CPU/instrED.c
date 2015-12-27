@@ -68,7 +68,7 @@ int LD_DD_pNN(void)
 
     uint8 retValue = prevPC;
 
-    sprintf(mnemonic, "LD %s,(%04x)", DD_45_Name(retValue), PC16andInc());
+    sprintf(mnemonic, "LD %s,[%04X]", DD_45_Name(retValue), PC16andInc());
 
     AddAddress(PC);
 
@@ -97,8 +97,8 @@ int LD_pNN_DD(void)
     uint16 address = PC16andInc();
     AddAddress(PC);
 
-    sprintf(mnemonic, "LD (%4x),%s", address, DD_45_Name(valDD));
-    sprintf(transcript, "(%4x)<-%s", address, DD_45_Name(prevPC));
+    sprintf(mnemonic, "LD [%4X],%s", address, DD_45_Name(valDD));
+    sprintf(transcript, "[%4X]<-%s", address, DD_45_Name(prevPC));
 
     return -1;
 
@@ -411,8 +411,8 @@ int IN_R_pC(void)
 
     if(((prevPC >> 3) & 7) != 6)
     {
-        sprintf(mnemonic, "IN %s, (C)", R8_HI_Name(prevPC));
-        sprintf(transcript, "%s <- (C)", R8_HI_Name(prevPC));
+        sprintf(mnemonic, "IN %s,(C)", R8_HI_Name(prevPC));
+        sprintf(transcript, "%s<-(C)", R8_HI_Name(prevPC));
         strcpy(comment, "C - A0...A7, B - A8...A15");
     }
     else
@@ -422,7 +422,7 @@ int IN_R_pC(void)
     strcpy(flags, "+ + X + X P 0 .");
     AddAddress(PC);
 
-    return 0;
+    return -1;
 #else
 
     if(((prevPC >> 3) & 7) == 6)

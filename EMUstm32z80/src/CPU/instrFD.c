@@ -21,7 +21,7 @@ int INC_pIY_D(void)
 #ifdef LISTING
 
     AddOpcode(RAM8(PC));
-    sprintf(mnemonic, "INC (IY+%d)", PCandInc());
+    sprintf(mnemonic, "INC [IY+%02X]", PCandInc());
     AddAddress(PC);
     return -1;
 
@@ -100,17 +100,17 @@ int SET_B_pIY_D_RES_pIY_D_BIT_B_pIY_D(void)
 
     if((valBit & 0xc7) == 0xc6)       // SET B, (IY + D)
     {
-        sprintf(mnemonic, "SET %d,(IY+0x%02x)", bit, valD);
+        sprintf(mnemonic, "SET %d,[IY+%02X]", bit, valD);
         return -1;
     }
     else if((valBit & 0xc7) == 0x86)  // RES B, (IY + D)
     {
-        sprintf(mnemonic, "RES %d,(IY+0x%02x)", bit, valD);
+        sprintf(mnemonic, "RES %d,[IY+%02X]", bit, valD);
         return -1;
     }
     else if((valBit & 0xc7) == 0x46)  // BIT B, (IY + D)
     {
-        sprintf(mnemonic, "BIT %d,(IY+0x&02x)", bit, valD);
+        sprintf(mnemonic, "BIT %d,[IY+%02X]", bit, valD);
         return -1;
     }
 
@@ -133,7 +133,7 @@ int LD_pIY_D_N(void)
     uint8 valD = PCandInc();
     uint8 valN = PCandInc();
 
-    sprintf(mnemonic, "LD (IY+%d), %d", valD, valN);
+    sprintf(mnemonic, "LD [IY+%02X],%02X", valD, valN);
 
     return -1;
 
@@ -154,6 +154,22 @@ int SUB_pIY_D(void)
 
 #else
 
+#endif
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+int LD_R_pIY_D(void)
+{
+#ifdef LISTING
+
+    uint8 valReg = prevPC;
+    AddOpcode(RAM8(PC));
+    AddAddress(PC + 1);
+    sprintf(mnemonic, "LD %s,[IY+%02X]", R8_HI_Name(valReg), PCandInc());
+    return -1;
+
+#else
 #endif
 }
 
@@ -233,7 +249,7 @@ int RunCommandWithPrefixFD(void)
         /*   01 000 011   */ 0,
         /*   01 000 100   */ 0,
         /*   01 000 101   */ 0,
-        /*   01 000 110   */ 0,
+        /*   01 000 110   */ LD_R_pIY_D,
         /*   01 000 111   */ 0,
         /*   01 001 000   */ 0,
         /*   01 001 001   */ 0,
@@ -241,7 +257,7 @@ int RunCommandWithPrefixFD(void)
         /*   01 001 011   */ 0,
         /*   01 001 100   */ 0,
         /*   01 001 101   */ 0,
-        /*   01 001 110   */ 0,
+        /*   01 001 110   */ LD_R_pIY_D,
         /*   01 001 111   */ 0,
         /*   01 010 000   */ 0,
         /*   01 010 001   */ 0,
@@ -249,7 +265,7 @@ int RunCommandWithPrefixFD(void)
         /*   01 010 011   */ 0,
         /*   01 010 100   */ 0,
         /*   01 010 101   */ 0,
-        /*   01 010 110   */ 0,
+        /*   01 010 110   */ LD_R_pIY_D,
         /*   01 010 111   */ 0,
         /*   01 011 000   */ 0,
         /*   01 011 001   */ 0,
@@ -257,7 +273,7 @@ int RunCommandWithPrefixFD(void)
         /*   01 011 011   */ 0,
         /*   01 011 100   */ 0,
         /*   01 011 101   */ 0,
-        /*   01 011 110   */ 0,
+        /*   01 011 110   */ LD_R_pIY_D,
         /*   01 011 111   */ 0,
         /*   01 100 000   */ 0,
         /*   01 100 001   */ 0,
@@ -265,7 +281,7 @@ int RunCommandWithPrefixFD(void)
         /*   01 100 011   */ 0,
         /*   01 100 100   */ 0,
         /*   01 100 101   */ 0,
-        /*   01 100 110   */ 0,
+        /*   01 100 110   */ LD_R_pIY_D,
         /*   01 100 111   */ 0,
         /*   01 101 000   */ 0,
         /*   01 101 001   */ 0,
@@ -273,7 +289,7 @@ int RunCommandWithPrefixFD(void)
         /*   01 101 011   */ 0,
         /*   01 101 100   */ 0,
         /*   01 101 101   */ 0,
-        /*   01 101 110   */ 0,
+        /*   01 101 110   */ LD_R_pIY_D,
         /*   01 101 111   */ 0,
         /*   01 110 000   */ LD_pIY_D_R,
         /*   01 110 001   */ LD_pIY_D_R,
@@ -281,7 +297,7 @@ int RunCommandWithPrefixFD(void)
         /*   01 110 011   */ LD_pIY_D_R,
         /*   01 110 100   */ LD_pIY_D_R,
         /*   01 110 101   */ LD_pIY_D_R,
-        /*   01 110 110   */ 0,
+        /*   01 110 110   */ LD_R_pIY_D,
         /*   01 110 111   */ LD_pIY_D_R,
         /*   01 111 000   */ 0,
         /*   01 111 001   */ 0,

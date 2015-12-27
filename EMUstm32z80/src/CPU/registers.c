@@ -185,7 +185,7 @@ char *R8_HI_Name(uint8 value)
         "E",
         "H",
         "L",
-        "(HL)",
+        "[HL]",
         "A"
     };
 
@@ -204,7 +204,7 @@ char *R8_LO_Name(uint8 value)
         "E",
         "H",
         "L",
-        "(HL)",
+        "[HL]",
         "A"
     };
 

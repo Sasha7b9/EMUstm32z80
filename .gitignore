@@ -1,5 +1,10 @@
 *.sdf
 *.opensdf
+report.txt
+
+Emustm32z80/VS2013/Debug/report.txt
+EMUstm32z80/VS2013/Z80decompil/report.txt
+
 EMUstm32z80/VS2013/EMUstm32z80/Debug/
 EMUstm32z80/VS2013/EMUstm32z80/ipch/
 EMUstm32z80/Objects/
