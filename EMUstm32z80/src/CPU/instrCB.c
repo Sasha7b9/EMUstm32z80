@@ -71,18 +71,6 @@ int CRL_pHL(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int RLC_pHL(void)
 {
-#ifdef LISTING
-
-    AddAddress(PC);
-    strcpy(mnemonic, "RLC [HL]");
-    return -1;
-
-#else
-
-    return 0;
-
-#endif
-
     return RLC(Operand_pHL);
 }
 

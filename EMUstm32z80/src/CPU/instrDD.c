@@ -3,6 +3,7 @@
 #include "registers.h"
 #include "RAM.h"
 #include "common.h"
+#include "instrThirdLeevl.h"
 
 
 #include <string.h>
@@ -181,6 +182,7 @@ int JP_pIX(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int RLC_pIX_D_and_BIT_B_pIX_D_and_SET_B_pIX_D_RES_B_pIX_D(void)
 {
+    return RunThridLevel(IR_IX);
 
 #ifdef LISTING
 

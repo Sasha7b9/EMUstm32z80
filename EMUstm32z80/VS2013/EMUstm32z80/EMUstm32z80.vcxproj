@@ -90,7 +90,7 @@
     <ClCompile Include="..\..\src\CPU\instrDD.c" />
     <ClCompile Include="..\..\src\CPU\instrED.c" />
     <ClCompile Include="..\..\src\CPU\instrFD.c" />
-    <ClCompile Include="..\..\src\CPU\instrFDCB.c" />
+    <ClCompile Include="..\..\src\CPU\instrThirdLevel.c" />
     <ClCompile Include="..\..\src\CPU\instrShift.c" />
     <ClCompile Include="..\..\src\CPU\registers.c" />
     <ClCompile Include="..\..\src\CPU\utils.c" />
@@ -109,7 +109,7 @@
     <ClInclude Include="..\..\src\CPU\instrDD.h" />
     <ClInclude Include="..\..\src\CPU\instrED.h" />
     <ClInclude Include="..\..\src\CPU\instrFD.h" />
-    <ClInclude Include="..\..\src\CPU\instrFDCB.h" />
+    <ClInclude Include="..\..\src\CPU\instrThirdLeevl.h" />
     <ClInclude Include="..\..\src\CPU\instrShift.h" />
     <ClInclude Include="..\..\src\CPU\registers.h" />
     <ClInclude Include="..\..\src\CPU\utils.h" />

@@ -31,13 +31,13 @@
     <ClCompile Include="..\..\src\RAM.c" />
     <ClCompile Include="src\common.c" />
     <ClCompile Include="src\DLLmain.c" />
-    <ClCompile Include="..\..\src\CPU\instrFDCB.c">
-      <Filter>CPU</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\CPU\instrShift.c">
       <Filter>CPU</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\CPU\utils.c">
+      <Filter>CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\CPU\instrThirdLevel.c">
       <Filter>CPU</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,13 +71,13 @@
     <ClInclude Include="..\..\src\RAM.h" />
     <ClInclude Include="src\common.h" />
     <ClInclude Include="src\DLLmain.h" />
-    <ClInclude Include="..\..\src\CPU\instrFDCB.h">
-      <Filter>CPU</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\CPU\instrShift.h">
       <Filter>CPU</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\CPU\utils.h">
+      <Filter>CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\CPU\instrThirdLeevl.h">
       <Filter>CPU</Filter>
     </ClInclude>
   </ItemGroup>

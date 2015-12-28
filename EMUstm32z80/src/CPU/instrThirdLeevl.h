@@ -1,7 +1,10 @@
 #pragma once
 
 
-int RunFDCB(void);
+#include "registers.h"
+
+
+int RunThridLevel(TypeIR type);
 
 
 int RLC_pIR_D_R(void);

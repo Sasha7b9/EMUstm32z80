@@ -1,9 +1,9 @@
-#include "instrFDCB.h"
+#include "instrThirdLeevl.h"
 #include "defines.h"
 #include "registers.h"
 #include "RAM.h"
 #include "common.h"
-
+#include "instrShift.h"
 
 #include <string.h>
 
@@ -11,16 +11,23 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static TypeIR typeIR = IR_IX;
+
+
+#define OPERAND (typeIR == IR_IX ? Operand_IX : Operand_IY)
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int RLC_pIR_D_R(void)
 {
-    return 0;
+    return RLC(OPERAND);
 }
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int RLC_pIR_D(void)
 {
-    return 0;
+    return RLC(OPERAND);
 }
 
 
@@ -165,8 +172,10 @@ int SET_B_pIR_D(void)
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-int RunFDCB(void)
+int RunThridLevel(TypeIR type)
 {
+    typeIR = type;
+
     const pFuncIV secondLevel[256] =
     {
         /*   00 000 000   */ RLC_pIR_D_R,
@@ -427,6 +436,8 @@ int RunFDCB(void)
         /*   11 111 111   */ SET_B_pIR_D_R
     };
 
+    AddOpcode(RAM8(PC));
+    PCandInc();
     AddOpcode(RAM8(PC));
 
     int index = PCandInc();
