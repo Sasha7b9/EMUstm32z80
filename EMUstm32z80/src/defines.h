@@ -7,7 +7,10 @@ typedef unsigned int uint;
 typedef signed short int16;
 typedef signed char int8;
 
+
 typedef uint8 bool;
+
+
 
 #define false 0
 #define true (!false)
@@ -37,3 +40,6 @@ typedef bool(*pFuncBV)(void);
 #define LOAD_BIT(value, bit, vBit) if(vBit) ((value) |= (1 << bit)); else ((value) &= (~(1 << bit)))
 
 #define LOG_ERROR()
+
+
+#define LISTING

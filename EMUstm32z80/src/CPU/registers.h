@@ -7,6 +7,9 @@
 #include "RAM.h"
 
 
+#include "utils.h"
+
+
 typedef union
 {
     //              C B   E D   L H   F A
@@ -98,6 +101,7 @@ extern uint8 imfB;
 #define PF      (GET_BIT(F, 2))
 #define SET_P   (F |= 4)
 #define RES_P   (RES_BIT(F, 2))
+#define CALC_P(value)  (IsEven(value))
 
 #define VF      (GET_BIT(F, 2))
 #define SET_V   (SET_BIT(F, 2))
@@ -124,6 +128,7 @@ extern uint8 imfB;
 
 #define R8_HI(value)    (*funcsReg8[(value >> 3) & 7]())
 #define R8_LO(value)    (*funcsReg8[value & 7]())
+#define pR8_LO(value)   (&(*funcsReg8[value & 7]()))
 
 #define DD_45(value)    (*funcsRegDD[(value >> 4) & 3]())
 #define SS_45(value)    (*funcsRegDD[(value >> 4) & 3]())

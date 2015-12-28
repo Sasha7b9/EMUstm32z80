@@ -26,6 +26,9 @@ int INC_pIY_D(void)
     return -1;
 
 #else
+
+    return 0;
+
 #endif
 }
 
@@ -41,6 +44,9 @@ int DEC_pIY_D(void)
     return -1;
 
 #else
+
+    return 0;
+
 #endif
 }
 
@@ -60,6 +66,9 @@ int LD_pIY_D_R(void)
     return -1;
 
 #else
+
+    return 0;
+
 #endif
 }
 
@@ -81,6 +90,9 @@ int LD_IY_NN(void)
     return -1;
 
 #else
+
+    return 0;
+
 #endif
 }
 
@@ -117,6 +129,9 @@ int SET_B_pIY_D_RES_pIY_D_BIT_B_pIY_D(void)
     return 1;
 
 #else
+
+    return 0;
+
 #endif
 }
 
@@ -138,6 +153,9 @@ int LD_pIY_D_N(void)
     return -1;
 
 #else
+
+    return 0;
+
 #endif
 }
 
@@ -153,6 +171,8 @@ int SUB_pIY_D(void)
     return -1;
 
 #else
+
+    return 0;
 
 #endif
 }
@@ -170,6 +190,9 @@ int LD_R_pIY_D(void)
     return -1;
 
 #else
+
+    return 0;
+
 #endif
 }
 
@@ -186,7 +209,7 @@ int ADD_A_pIY_D(void)
 
 #else
 
-
+    return 0;
 
 #endif
 }
@@ -204,7 +227,7 @@ int CP_pIY_D(void)
 
 #else
 
-
+    return 0;
 
 #endif
 }
@@ -222,7 +245,7 @@ int XOR_pIY_D(void)
 
 #else
 
-
+    return 0;
 
 #endif
 }

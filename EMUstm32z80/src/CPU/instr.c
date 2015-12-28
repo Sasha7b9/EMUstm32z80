@@ -8,6 +8,7 @@
 #include "instrED.h"
 #include "instrFD.h"
 #include "common.h"
+#include "instrShift.h"
 
 
 #include <string.h>
@@ -1327,20 +1328,11 @@ int RLCA(void)
 
 #else
 
-    uint8 hiBit = GET_BIT(A, 7);
-
-    A <<= 1;
-
-    LOAD_BIT(A, 0, hiBit);
-    LOAD_C(hiBit);
-
-    // . . x 0 x . 0 +
-    RES_H;
-    RES_N;
-
-    return 4;
+    return RLC(Operand_A);
 
 #endif
+
+    return RLC(Operand_A);
 }
 
 

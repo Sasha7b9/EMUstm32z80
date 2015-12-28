@@ -470,6 +470,8 @@ int INI(void)
 
 #else
 
+    return 0;
+
 #endif
 }
 
@@ -487,6 +489,9 @@ int INIR(void)
     return 0;
 
 #else
+
+    return 0;
+
 #endif
 }
 
@@ -502,6 +507,9 @@ int IND(void)
     return 0;
 
 #else
+
+    return 0;
+
 #endif
 }
 
@@ -518,6 +526,8 @@ int INDR(void)
 
 #else
 
+    return 0;
+
 #endif
 }
 
@@ -529,6 +539,10 @@ int OUT_pC_R(void)
 
     sprintf(mnemonic, "OUT (C), %s", R8_HI_Name(prevPC));
     sprintf(transcript, "(C)<-%s", R8_HI_Name(prevPC));
+    return 0;
+
+#else
+
     return 0;
 
 #endif

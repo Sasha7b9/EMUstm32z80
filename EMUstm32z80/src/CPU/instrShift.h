@@ -3,6 +3,7 @@
 
 typedef enum
 {
+    Operand_A,
     Operand_Reg8,
     Operand_pHL,
     Operand_IX,

@@ -14,6 +14,8 @@
 
 #include "RAM.h"
 
+#include "instrShift.h"
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int BIT_B_R(void)
@@ -25,6 +27,9 @@ int BIT_B_R(void)
     return -1;
 
 #else
+
+    return 0;
+
 #endif
 }
 
@@ -40,6 +45,7 @@ int CRL_R(void)
 
 #else
 
+    return 0;
 
 #endif
 }
@@ -56,6 +62,8 @@ int CRL_pHL(void)
 
 #else
 
+    return 0;
+
 #endif
 }
 
@@ -71,26 +79,18 @@ int RLC_pHL(void)
 
 #else
 
-
+    return 0;
 
 #endif
+
+    return RLC(Operand_pHL);
 }
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int RLC_R(void)
 {
-#ifdef LISTING
-
-    AddAddress(PC);
-    sprintf(mnemonic, "RLC %s", R8_LO_Name(prevPC));
-    return -1;
-
-#else
-
-
-
-#endif
+    return RLC(Operand_Reg8);
 }
 
 
@@ -106,7 +106,7 @@ int RES_B_M(void)
 
 #else
 
-
+    return 0;
 
 #endif
 }
@@ -124,7 +124,7 @@ int RES_B_pHL(void)
 
 #else
 
-
+    return 0;
 
 #endif
 }
@@ -141,7 +141,7 @@ int SET_B_R(void)
 
 #else
 
-
+    return 0;
 
 #endif
 }
@@ -158,6 +158,8 @@ int SET_B_pHL(void)
 
 #else
 
+    return 0;
+
 #endif
 }
 
@@ -173,7 +175,7 @@ int RL_R(void)
 
 #else
 
-
+    return 0;
 
 #endif
 }
@@ -190,7 +192,7 @@ int RR_R(void)
 
 #else
 
-
+    return 0;
 
 #endif
 }
