@@ -18,3 +18,9 @@ int LD_pIY_D_N(void);
 int SUB_pIY_D(void);
 
 int LD_R_pIY_D(void);
+
+int ADD_A_pIY_D(void);
+
+int CP_pIY_D(void);
+
+int XOR_pIY_D(void);

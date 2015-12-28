@@ -93,7 +93,7 @@ void DataBase::RemoveScanAddress(int address)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 void DataBase::AddScanAddress(int address)
 {
-    if(!AddressAlreadyScanOrFuture(address))
+    if(address < 16384 && !AddressAlreadyScanOrFuture(address))
     {
         addressesForScan.push_back(address);
     }

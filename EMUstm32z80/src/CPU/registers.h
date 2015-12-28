@@ -4,6 +4,9 @@
 #include "defines.h"
 
 
+#include "RAM.h"
+
+
 typedef union
 {
     //              C B   E D   L H   F A

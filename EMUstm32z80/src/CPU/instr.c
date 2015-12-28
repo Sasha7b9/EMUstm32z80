@@ -133,18 +133,38 @@ int LD_pHL_N(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int LD_A_pBC(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    sprintf(mnemonic, "LD A,[BC]");
+    return -1;
+
+#else
+
     A = RAM[BC];
 
     return 7;
+
+#endif
 }
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int LD_A_pDE(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    sprintf(mnemonic, "LD A,[DE]");
+    return -1;
+
+#else
+
     A = RAM[DE];
 
     return 7;
+
+#endif
 }
 
 
@@ -174,18 +194,38 @@ int LD_A_pNN(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int LD_pBC_A(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    sprintf(mnemonic, "LD [BC],A");
+    return -1;
+
+#else
+
     RAM[BC] = A;
 
     return 7;
+
+#endif
 }
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int LD_pDE_A(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    sprintf(mnemonic, "LD [DE],A");
+    return -1;
+
+#else
+
     RAM[DE] = A;
 
     return 7;
+
+#endif
 }
 
 
@@ -355,12 +395,22 @@ int EX_DE_HL(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int EX_AF_AFalt(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    strcpy(mnemonic, "EX AF,AF\'");
+    return -1;
+
+#else
+
     uint8 temp;
 
     EXCH(A, Aalt);
     EXCH(F, RFalt);
 
     return 4;
+
+#endif
 }
 
 
@@ -396,12 +446,22 @@ int EXX(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int EX_pSP_HL(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    sprintf(mnemonic, "EX [SP],HL");
+    return -1;
+
+#else
+
     uint8 temp;
 
     EXCH(H, RAM[SP + 1]);
     EXCH(L, RAM[SP]);
 
     return 9;
+
+#endif
 }
 
 
@@ -447,27 +507,59 @@ int ADD_A_N(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int ADD_A_pHL(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    sprintf(mnemonic, "ADD A,[HL]");
+    return -1;
+
+#else
+
     A += pHL;
 
     return 7;
+
+#endif
 }
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int ADC_A_S(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC + 1);
+    AddOpcode(RAM8(PC));
+    sprintf(mnemonic, "ADC A,%s", R8_LO_Name(prevPC));
+    return -1;
+
+#else
+
     A += R8_LO(prevPC) + CF;
 
     return 4;
+
+#endif
 }
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int ADC_A_N(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC + 1);
+    AddOpcode(RAM8(PC));
+    sprintf(mnemonic, "ADC A,%02X", PCandInc());
+    return -1;
+
+#else
+
     A += PCandInc() + CF;
 
     return 7;
+
+#endif
 }
 
 
@@ -483,9 +575,19 @@ int ADC_A_pHL(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int SUB_S(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    sprintf(mnemonic, "SUB %s", R8_LO_Name(prevPC));
+    return -1;
+
+#else
+
     A -= R8_LO(prevPC);
 
     return 4;
+
+#endif
 }
 
 
@@ -545,27 +647,58 @@ int LD_HL_pNN(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int SBC_A_S(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    sprintf(mnemonic, "SBC A,%s", R8_LO_Name(prevPC));
+    return -1;
+
+#else
+
     A -= R8_LO(prevPC) - CF;
 
     return 4;
+
+#endif
 }
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int SBC_A_N(void)
 {
+#ifdef LISTING
+
+    AddOpcode(RAM8(PC));
+    AddAddress(PC + 1);
+    sprintf(mnemonic, "SBC A,%02X", PCandInc());
+    return -1;
+
+#else
+
     A -= PCandInc() - CF;
 
     return 7;
+
+#endif
 }
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int SBC_A_pHL(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    sprintf(mnemonic, "SBC A,[HL]");
+    return -1;
+
+#else
+
     A -= pHL - CF;
 
     return 7;
+
+#endif
 }
 
 
@@ -616,9 +749,19 @@ int AND_N(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int AND_pHL(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    strcpy(mnemonic, "AND [HL]");
+    return -1;
+
+#else
+
     A &= pHL;
 
     return 7;
+
+#endif
 }
 
 
@@ -646,18 +789,39 @@ int OR_S(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int OR_N(void)
 {
+#ifdef LISTING
+
+    AddOpcode(RAM8(PC));
+    AddAddress(PC + 1);
+    sprintf(mnemonic, "OR %02X", PCandInc());
+    return -1;
+
+#else
+
     A |= PCandInc();
 
     return 7;
+
+#endif
 }
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int OR_pHL(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    strcpy(mnemonic, "OR [HL]");
+    return -1;
+
+#else
+
     A |= pHL;
 
     return 7;
+
+#endif
 }
 
 
@@ -705,9 +869,19 @@ int XOR_N(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int XOR_pHL(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    strcpy(mnemonic, "XOR [HL]");
+    return -1;
+
+#else
+
     A ^= pHL;
 
     return 7;
+
+#endif
 }
 
 
@@ -832,6 +1006,14 @@ int INC_R(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int INC_pHL(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    strcpy(mnemonic, "INC [HL]");
+    return -1;
+
+#else
+
     pHL += 1;
 
     // + + x + x v 0 .
@@ -842,6 +1024,8 @@ int INC_pHL(void)
     */
 
     return 7;
+
+#endif
 }
 
 
@@ -1135,6 +1319,14 @@ int DEC_SS(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int RLCA(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    strcpy(mnemonic, "RLCA");
+    return -1;
+
+#else
+
     uint8 hiBit = GET_BIT(A, 7);
 
     A <<= 1;
@@ -1147,6 +1339,8 @@ int RLCA(void)
     RES_N;
 
     return 4;
+
+#endif
 }
 
 
@@ -1208,6 +1402,14 @@ int RRCA(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int RRA(void)
 {
+#ifdef LISTING
+
+    AddAddress(PC);
+    strcpy(mnemonic, "RRA");
+    return -1;
+
+#else
+
     uint8 loBit = GET_BIT(A, 0);
     uint8 oldCY = CF;
 
@@ -1220,6 +1422,8 @@ int RRA(void)
     RES_N;
 
     return 4;
+
+#endif
 }
 
 
@@ -1235,8 +1439,8 @@ int JP_NN(void)
 
     AddAddress(address);
 
-    sprintf(mnemonic, "JP %4X", address);
-    sprintf(transcript, "PC<-%4X", address);
+    sprintf(mnemonic, "JP %04X", address);
+    sprintf(transcript, "PC<-%04X", address);
 
     *tackts = 10;
 
@@ -1397,11 +1601,43 @@ static void WriteE(char *name)
     uint8 value = PCandInc();
 
     int shift = ((int)((int8)value)) + 2;
-    uint newAddress = PC + shift - 2;;
+    uint newAddress = PC + shift - 2;
 
     sprintf(mnemonic, "JR %s%dd (%04X)", name, shift, newAddress);
 
     AddAddress(newAddress);
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+int DJNZ_E(void)
+{
+#ifdef LISTING
+
+    AddOpcode(RAM8(PC));
+    AddAddress(PC + 1);
+    uint8 value = PCandInc();
+    int shift = ((int)((int8)value)) + 2;
+    uint newAddress = PC + shift - 2;
+    sprintf(mnemonic, "DJNZ %dd (%04X)", shift, newAddress);
+    AddAddress(newAddress);
+    return -1;
+
+#else
+
+    B -= 1;
+
+    uint8 delta = PCandInc();
+
+    if (B)
+    {
+        AddPC(delta);
+        return 13;
+    }
+
+    return 8;
+
+#endif
 }
 
 
@@ -1537,23 +1773,6 @@ int JP_pHL(void)
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-int DJNZ_E(void)
-{
-    B -= 1;
-    
-    uint8 delta = PCandInc();
-
-    if(B)
-    {
-        AddPC(delta);
-        return 13;
-    }
-
-    return 8;
-}
-
-
-//------------------------------------------------------------------------------------------------------------------------------------------------------
 int CALL_NN(void)
 {
 #ifdef LISTING
@@ -1588,6 +1807,19 @@ int CALL_NN(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int CALL_CC_NN(void)
 {
+#ifdef LISTING
+
+    AddOpcode(RAM8(PC));
+    AddOpcode(RAM8(PC + 1));
+    AddAddress(PC + 2);
+    uint8 value = prevPC;
+    uint16 newAddress = PC16andInc();
+    AddAddress(newAddress);
+    sprintf(mnemonic, "CALL %s,%04X", Cond_Name(value), newAddress);
+    return -1;
+
+#else
+
     if(Cond(prevPC))
     {
         return CALL_NN();
@@ -1595,6 +1827,8 @@ int CALL_CC_NN(void)
 
     PC16andInc();
     return 10;
+
+#endif
 }
 
 
@@ -1656,9 +1890,9 @@ int RST_P(void)
 
 #ifdef LISTING
 
-    //AddAddress(PC);       WARN there cicle
+    AddAddress(PC);
     int address = P[(prevPC >> 3) & 7];
-    //AddAddress(address);
+    AddAddress(address);
     sprintf(mnemonic, "RST %02X", address);
 
     return -1;
@@ -1683,8 +1917,19 @@ int RST_P(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int IN_A_pN(void)
 {
+#ifdef LISTING
+
+    AddOpcode(RAM8(PC));
+    AddAddress(PC + 1);
+    sprintf(mnemonic, "IN A,(%02X)", PCandInc());
+    return -1;
+
+#else
+
     A = ReadPort(PCandInc());
     return 11;
+
+#endif
 }
 
 

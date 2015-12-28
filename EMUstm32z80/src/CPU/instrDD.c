@@ -164,18 +164,48 @@ int INC_IX(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int JP_pIX(void)
 {
+#ifdef LISTING
+
+    strcpy(mnemonic, "JP [IX]");
+    return -1;
+
+#else
+
     PC = IX;
     return 8;
+
+#endif
 }
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-int RLC_pIX_D_and_BIT_B_pIX_D_and_SET_B_pIX_D(void)
+int RLC_pIX_D_and_BIT_B_pIX_D_and_SET_B_pIX_D_RES_B_pIX_D(void)
 {
+
+#ifdef LISTING
+
+    AddOpcode(RAM8(PC));
+    AddOpcode(RAM8(PC + 1));
+    AddAddress(PC + 2);
+
+    uint8 valD = PCandInc();
+    uint8 valBit = PCandInc();
+    uint8 bit = (valBit >> 3) & 7;
+
+    if ((valBit & 0xc7) == 0x86)    // RES b, [IX + d]
+    {
+        sprintf(mnemonic, "RES %d,[IX+%02X]", bit, valD);
+        return -1;
+    }
+
+    return 1;
+
+#else
+
     uint8 valD = PCandInc();
     uint8 sign = PCandInc();
 
-    if(sign == 0x06)    // RLC (IX + D)
+    if(sign == 0x06)            // RLC (IX + D)
     {
         uint8 hiBit = GET_BIT(RAM8(IX + valD), 7);
         LOAD_C(hiBit);
@@ -200,6 +230,8 @@ int RLC_pIX_D_and_BIT_B_pIX_D_and_SET_B_pIX_D(void)
     LOG_ERROR();
 
     return 0;
+
+#endif
 }
 
 
@@ -411,7 +443,7 @@ int RunCommandWithPrefixDD(void)
         /*   11 001 000   */ 0,
         /*   11 001 001   */ 0,
         /*   11 001 010   */ 0,
-        /*   11 001 011   */ RLC_pIX_D_and_BIT_B_pIX_D_and_SET_B_pIX_D,
+        /*   11 001 011   */ RLC_pIX_D_and_BIT_B_pIX_D_and_SET_B_pIX_D_RES_B_pIX_D,
         /*   11 001 100   */ 0,
         /*   11 001 101   */ 0,
         /*   11 001 110   */ 0,

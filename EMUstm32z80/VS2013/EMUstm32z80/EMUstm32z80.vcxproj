@@ -90,6 +90,8 @@
     <ClCompile Include="..\..\src\CPU\instrDD.c" />
     <ClCompile Include="..\..\src\CPU\instrED.c" />
     <ClCompile Include="..\..\src\CPU\instrFD.c" />
+    <ClCompile Include="..\..\src\CPU\instrFDCB.c" />
+    <ClCompile Include="..\..\src\CPU\instrShift.c" />
     <ClCompile Include="..\..\src\CPU\registers.c" />
     <ClCompile Include="..\..\src\defines.c" />
     <ClCompile Include="..\..\src\Hardware\ports.c" />
@@ -106,6 +108,8 @@
     <ClInclude Include="..\..\src\CPU\instrDD.h" />
     <ClInclude Include="..\..\src\CPU\instrED.h" />
     <ClInclude Include="..\..\src\CPU\instrFD.h" />
+    <ClInclude Include="..\..\src\CPU\instrFDCB.h" />
+    <ClInclude Include="..\..\src\CPU\instrShift.h" />
     <ClInclude Include="..\..\src\CPU\registers.h" />
     <ClInclude Include="..\..\src\defines.h" />
     <ClInclude Include="..\..\src\Hardware\ports.h" />
