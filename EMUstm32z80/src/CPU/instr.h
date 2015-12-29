@@ -6,6 +6,8 @@
 
 int RunCommand(void);
 
+int DecodeCommand(void);
+
 // First level
 int LD_R_R(void);
 
@@ -28,8 +30,6 @@ int LD_pBC_A(void);
 int LD_pDE_A(void);
 
 int LD_pNN_A(void);
-
-int LD_DD_NN(void);
 
 int LD_HL_pNN(void);
 
@@ -121,8 +121,6 @@ int CPL(void);          // CPL          A <- !A
 int CCF(void);          // CCF          CF <- !CF
 
 int SCF(void);          // CCF          CF <- 1
-
-int NOP(void);          // NOP
 
 int HALT(void);         // HALT
 

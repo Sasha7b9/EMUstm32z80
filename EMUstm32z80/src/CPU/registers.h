@@ -10,13 +10,7 @@
 #include "utils.h"
 
 
-typedef union
-{
-    //              C B   E D   L H   F A
-    uint8   r8[8];
-    //              BC    DE    HL    AF  SP IX IY PC
-    uint16  r16[8];
-} REGS;
+#include "DLLmain.h"
 
 
 typedef enum

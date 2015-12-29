@@ -96,6 +96,7 @@ int SET_B_pIY_D_RES_pIY_D_BIT_B_pIY_D(void)
 {
     return RunThridLevel(IR_IY);
 
+    /*
 #ifdef LISTING
 
     AddOpcode(RAM8(PC));
@@ -129,6 +130,7 @@ int SET_B_pIY_D_RES_pIY_D_BIT_B_pIY_D(void)
     return 0;
 
 #endif
+    */
 }
 
 

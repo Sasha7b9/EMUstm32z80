@@ -55,7 +55,9 @@ __declspec(dllexport) void __cdecl Init
     int *eNumAddresses,
     uint8 eOpCodes[10],
     int *eNumOpCodes,
-    int *eTackts
+    int *eTackts,
+    REGS **regs_,
+    REGS **regsAlt_
 )
 {
     RAM = eRAM;
@@ -71,11 +73,14 @@ __declspec(dllexport) void __cdecl Init
     numOpCodes = eNumOpCodes;
 
     tackts = eTackts;
+
+    *regs_ = &regs;
+    *regsAlt_ = &regsAlt;
 }
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-__declspec(dllexport) int Decode(uint16 address)
+__declspec(dllexport) int Decode(int address)
 {
     *numAddresses = 0;
     *numOpCodes = 0;
@@ -84,8 +89,24 @@ __declspec(dllexport) int Decode(uint16 address)
     *tackts = 0;
     *comment = 0;
 
-    PC = address;
+    PC = (uint16)address;
 
     // If RunCommand() return >= 0, decoding fail
-    return (RunCommand() < 0) ? 1 : 0;
+    return DecodeCommand();
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+__declspec(dllexport) int Run(int address)
+{
+    PC = (uint16)address;
+
+    return RunCommand();
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+__declspec(dllexport) int RunNext(void)
+{
+    return RunCommand();
 }

@@ -104,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\CPU\DAA.h" />
+    <ClInclude Include="..\..\src\CPU\FirstLevelFunc.h" />
     <ClInclude Include="..\..\src\CPU\instr.h" />
     <ClInclude Include="..\..\src\CPU\instrCB.h" />
     <ClInclude Include="..\..\src\CPU\instrDD.h" />

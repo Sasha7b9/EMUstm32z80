@@ -184,6 +184,7 @@ int RLC_pIX_D_and_BIT_B_pIX_D_and_SET_B_pIX_D_RES_B_pIX_D(void)
 {
     return RunThridLevel(IR_IX);
 
+    /*
 #ifdef LISTING
 
     AddOpcode(RAM8(PC));
@@ -234,6 +235,7 @@ int RLC_pIX_D_and_BIT_B_pIX_D_and_SET_B_pIX_D_RES_B_pIX_D(void)
     return 0;
 
 #endif
+    */
 }
 
 

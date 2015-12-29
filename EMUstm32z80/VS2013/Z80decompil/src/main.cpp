@@ -23,6 +23,8 @@ uint8 opCodes[10];
 int numOpCodes;
 int tackts;
 
+REGS *regs;
+REGS *regsAlt;
 
 DataBase base;
 
@@ -30,7 +32,7 @@ DataBase base;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main()
 {
-    Init(RAM48, mnemonic, comment, flags, transcript, addresses, &numAddresses, opCodes, &numOpCodes, &tackts);
+    Init(RAM48, mnemonic, comment, flags, transcript, addresses, &numAddresses, opCodes, &numOpCodes, &tackts, &regs, &regsAlt);
 
     int address = base.NextAddress();
 
