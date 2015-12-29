@@ -12,3 +12,5 @@ typedef enum
 
 
 int RLC(TypeOperand type);
+
+int RRC(TypeOperand type);

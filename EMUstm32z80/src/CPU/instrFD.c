@@ -1,18 +1,12 @@
 #include "instrFD.h"
-
 #include "defines.h"
-
 #include "CPU/registers.h"
-
 #include "Hardware/ports.h"
-
 #include <string.h>
-
 #include <stdio.h>
-
 #include "common.h"
-
 #include "RAM.h"
+#include "instrThirdLeevl.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
