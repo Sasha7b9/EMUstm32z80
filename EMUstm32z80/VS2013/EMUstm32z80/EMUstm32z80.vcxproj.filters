@@ -83,6 +83,12 @@
     <ClInclude Include="..\..\src\CPU\FirstLevelFunc.h">
       <Filter>CPU</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\CPU\SecondLevelFuncCB.h">
+      <Filter>CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\CPU\SecondLevelFuncDD.h">
+      <Filter>CPU</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CPU">

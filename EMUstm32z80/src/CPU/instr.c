@@ -1961,3 +1961,13 @@ int RunCommand(void)
 
     return firstLevel[PCandInc()][1]();
 }
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+int DecodeCommand(void)
+{
+    AddOpcode(RAM8(PC));
+
+    return firstLevel[PCandInc()][0]();
+}
+
