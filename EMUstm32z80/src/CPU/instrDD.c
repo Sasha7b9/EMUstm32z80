@@ -3,7 +3,7 @@
 #include "registers.h"
 #include "RAM.h"
 #include "common.h"
-#include "instrThirdLeevl.h"
+#include "instrFDCB_DDCB.h"
 
 
 #include <string.h>
@@ -240,7 +240,7 @@ int RLC_pIX_D_and_BIT_B_pIX_D_and_SET_B_pIX_D_RES_B_pIX_D(void)
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-#include "SecondLevelFuncDD.h"
+#include "FuncSecondDD.h"
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------

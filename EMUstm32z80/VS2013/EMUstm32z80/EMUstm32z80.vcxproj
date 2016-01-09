@@ -90,7 +90,7 @@
     <ClCompile Include="..\..\src\CPU\instrDD.c" />
     <ClCompile Include="..\..\src\CPU\instrED.c" />
     <ClCompile Include="..\..\src\CPU\instrFD.c" />
-    <ClCompile Include="..\..\src\CPU\instrThirdLevel.c" />
+    <ClCompile Include="..\..\src\CPU\instrFDCB_DDCB.c" />
     <ClCompile Include="..\..\src\CPU\instrShift.c" />
     <ClCompile Include="..\..\src\CPU\registers.c" />
     <ClCompile Include="..\..\src\CPU\utils.c" />
@@ -104,17 +104,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\CPU\DAA.h" />
-    <ClInclude Include="..\..\src\CPU\FirstLevelFunc.h" />
-    <ClInclude Include="..\..\src\CPU\SecondLevelFuncCB.h" />
+    <ClInclude Include="..\..\src\CPU\FuncFirst.h" />
+    <ClInclude Include="..\..\src\CPU\FuncSecondCB.h" />
+    <ClInclude Include="..\..\src\CPU\FuncThird.h" />
     <ClInclude Include="..\..\src\CPU\instr.h" />
     <ClInclude Include="..\..\src\CPU\instrCB.h" />
     <ClInclude Include="..\..\src\CPU\instrDD.h" />
     <ClInclude Include="..\..\src\CPU\instrED.h" />
     <ClInclude Include="..\..\src\CPU\instrFD.h" />
-    <ClInclude Include="..\..\src\CPU\instrThirdLeevl.h" />
+    <ClInclude Include="..\..\src\CPU\instrFDCB_DDCB.h" />
     <ClInclude Include="..\..\src\CPU\instrShift.h" />
     <ClInclude Include="..\..\src\CPU\registers.h" />
-    <ClInclude Include="..\..\src\CPU\SecondLevelFuncDD.h" />
+    <ClInclude Include="..\..\src\CPU\FuncSecondDD.h" />
+    <ClInclude Include="..\..\src\CPU\FuncSecondED.h" />
+    <ClInclude Include="..\..\src\CPU\FuncSecondFD.h" />
     <ClInclude Include="..\..\src\CPU\utils.h" />
     <ClInclude Include="..\..\src\defines.h" />
     <ClInclude Include="..\..\src\Hardware\ports.h" />
