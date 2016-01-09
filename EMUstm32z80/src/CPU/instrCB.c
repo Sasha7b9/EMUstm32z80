@@ -191,7 +191,23 @@ int RR_R(void)
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-int RunCommandWithPrefixCB(void)
+int RunCommandCB(void)
+{
+    AddOpcode(RAM8(PC));
+
+    int index = PCandInc();
+
+    if(secondLevelCB[index][1] == 0)
+    {
+        return 0;
+    }
+
+    return secondLevelCB[index][1]();
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+int DecodeCommandCB(void)
 {
     AddOpcode(RAM8(PC));
 
@@ -202,5 +218,5 @@ int RunCommandWithPrefixCB(void)
         return 0;
     }
 
-    return secondLevelCB[index][0]();
+    return  secondLevelCB[index][0]();
 }

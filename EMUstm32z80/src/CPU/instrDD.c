@@ -244,7 +244,7 @@ int RLC_pIX_D_and_BIT_B_pIX_D_and_SET_B_pIX_D_RES_B_pIX_D(void)
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-int RunCommandWithPrefixDD(void)
+int DecodeCommandDD(void)
 {
     AddOpcode(RAM8(PC));
 
@@ -256,4 +256,18 @@ int RunCommandWithPrefixDD(void)
     }
 
     return secondLevelDD[index][0]();
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+int RunCommandDD(void)
+{
+    int index = PCandInc();
+
+    if(secondLevelDD[index][1] == 0)
+    {
+        return 0;
+    }
+
+    return secondLevelDD[index][1]();
 }

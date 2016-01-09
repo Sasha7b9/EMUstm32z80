@@ -554,7 +554,23 @@ int OUT_pC_R(void)
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-int RunCommandWithPrefixED(void)
+int RunCommandED(void)
+{
+    AddOpcode(RAM8(PC));
+
+    int index = PCandInc();
+
+    if(secondLevelED[index][1] == 0)
+    {
+        return 0;
+    }
+
+    return secondLevelED[index][1]();
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+int DecodeCommandED(void)
 {
     AddOpcode(RAM8(PC));
 

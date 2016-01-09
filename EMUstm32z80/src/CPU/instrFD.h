@@ -1,26 +1,6 @@
 #pragma once
 
 
-int RunCommandWithPrefixFD(void);
+int RunCommandFD(void);
 
-int INC_pIY_D(void);
-
-int LD_pIY_D_R(void);
-
-int LD_IY_NN(void);
-
-int DEC_pIY_D(void);
-
-int SET_B_pIY_D_RES_pIY_D_BIT_B_pIY_D(void);
-
-int LD_pIY_D_N(void);
-
-int SUB_pIY_D(void);
-
-int LD_R_pIY_D(void);
-
-int ADD_A_pIY_D(void);
-
-int CP_pIY_D(void);
-
-int XOR_pIY_D(void);
+int DecodeCommandFD(void);

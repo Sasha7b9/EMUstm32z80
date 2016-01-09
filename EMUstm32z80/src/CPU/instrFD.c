@@ -254,7 +254,23 @@ int XOR_pIY_D(void)
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-int RunCommandWithPrefixFD(void)
+int RunCommandFD(void)
+{
+    AddOpcode(RAM8(PC));
+
+    int index = PCandInc();
+
+    if(secondLevelFD[index][1] == 0)
+    {
+        return 0;
+    }
+
+    return secondLevelFD[index][1]();
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+int DecodeCommandFD(void)
 {
     AddOpcode(RAM8(PC));
 
