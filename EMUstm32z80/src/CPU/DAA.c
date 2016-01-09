@@ -16,16 +16,16 @@
 #include "RAM.h"
 
 
-int DAA(void)
+int DAA_dec(void)
 {
-#ifdef LISTING
-
     AddAddress(PC);
     strcpy(mnemonic, "DAA");
     return -1;
+}
 
-#else
 
+int DAA_run(void)
+{
     const uint8 DAAadjust[4096] =
     {
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06,
@@ -314,5 +314,4 @@ int DAA(void)
 
     return 4;
 
-#endif
 }

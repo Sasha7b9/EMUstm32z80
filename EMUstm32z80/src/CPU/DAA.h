@@ -1,4 +1,6 @@
 #pragma once
 
 
-int DAA(void);
+int DAA_dec(void);
+
+int DAA_run(void);
