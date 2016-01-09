@@ -10,6 +10,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Z80decompil", "..\Z80decomp
 		{F55C0B22-9659-4946-86D7-01A5F858561E} = {F55C0B22-9659-4946-86D7-01A5F858561E}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Z80debugger", "..\Z80debugger\Z80debugger.vcxproj", "{BCD1FC8C-D79D-40C2-A45C-3ADC17ACEB75}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F55C0B22-9659-4946-86D7-01A5F858561E} = {F55C0B22-9659-4946-86D7-01A5F858561E}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -24,6 +29,10 @@ Global
 		{9E2AA5DB-38D6-4DE2-B90D-AB9AF16BCD38}.Debug|Win32.Build.0 = Debug|Win32
 		{9E2AA5DB-38D6-4DE2-B90D-AB9AF16BCD38}.Release|Win32.ActiveCfg = Release|Win32
 		{9E2AA5DB-38D6-4DE2-B90D-AB9AF16BCD38}.Release|Win32.Build.0 = Release|Win32
+		{BCD1FC8C-D79D-40C2-A45C-3ADC17ACEB75}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BCD1FC8C-D79D-40C2-A45C-3ADC17ACEB75}.Debug|Win32.Build.0 = Debug|Win32
+		{BCD1FC8C-D79D-40C2-A45C-3ADC17ACEB75}.Release|Win32.ActiveCfg = Release|Win32
+		{BCD1FC8C-D79D-40C2-A45C-3ADC17ACEB75}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
