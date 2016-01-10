@@ -5,6 +5,25 @@
 #pragma warning(disable:4820)
 
 
+#define ADDR_C 0
+#define ADDR_B 1
+#define ADDR_E 2
+#define ADDR_D 3
+#define ADDR_L 4
+#define ADDR_H 5
+#define ADDR_F 6
+#define ADDR_A 7
+
+#define ADDR_BC 0
+#define ADDR_DE 1
+#define ADDR_HL 2
+#define ADDR_AF 3
+#define ADDR_SP 4
+#define ADDR_IX 5
+#define ADDR_IY 6
+#define ADDR_PC 7
+
+
 typedef union
 {
     unsigned char r8[8];    // C B  E D  L H  F A

@@ -29,7 +29,6 @@ int main()
 
     while(address >= 0)
     {
-        std::cout << std::hex << address << std::endl;
         bool res = Decode((uint16)address) != 0;
 
         base.AddNewData(res, address, &params);
