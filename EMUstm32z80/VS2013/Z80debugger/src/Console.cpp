@@ -32,8 +32,8 @@ Console::Console()
 
     GetConsoleScreenBufferInfoEx(outHandle, &info);
 
-    info.dwSize.X = WIDTH;
-    info.dwSize.Y = HEIGHT;
+    info.dwSize.X = WIDTH_CONSOLE;
+    info.dwSize.Y = HEIGHT_CONSOLE;
     info.dwCursorPosition.X = 10;
     info.dwCursorPosition.Y = 10;
     info.srWindow.Left = 0;
@@ -49,8 +49,22 @@ Console::Console()
 
     COORD coord;
     coord.X = (SHORT)posCommandLine;
-    coord.Y = HEIGHT - 1;
+    coord.Y = HEIGHT_CONSOLE - 1;
     SetConsoleCursorPosition(outHandle, coord);
+
+    for(int i = 0; i < WIDTH_CONSOLE * HEIGHT_CONSOLE; i++)
+    {
+        backBuffer[i].Char.AsciiChar = ' ';
+        backBuffer[i].Attributes = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED;
+    }
+
+    for(int i = 0; i < WIDTH_CONSOLE; i++)
+    {
+        commandLine[i] = ' ';
+    }
+
+    CONSOLE_CURSOR_INFO cursorInfo = {1, 0};
+    SetConsoleCursorInfo(outHandle, &cursorInfo);
 }
 
 
@@ -59,22 +73,13 @@ bool Console::Update()
 {
     if(GetTickCount() - prevUpdate > 40)
     {
-        DWORD timeEnter = GetTickCount();
+        ClearBackBuffer();
 
-        int count = 10;
-
-        for(int i = 0; i < count; i++)
-        {
-            WriteScreen();
-        }
-
-        Write16bit(100, 0, (uint16)((GetTickCount() - timeEnter) / count));
+        WriteScreen();
 
         prevUpdate = GetTickCount();
 
-        COORD coord;
-        coord.X = (SHORT)posCommandLine;
-        coord.Y = HEIGHT - 1;
+        WriteBackBuffer();
     }
 
     if(_kbhit())
@@ -104,18 +109,19 @@ bool Console::Update()
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 void Console::AddToCommandLine(char symbol)
 {
-    char buffer[1];
-    buffer[0] = symbol;
-
-    SetConsoleTextAttribute(outHandle, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
-
-    WriteFile(outHandle, buffer, 1, NULL, NULL);
-
-    posCommandLine = posCommandLine + (symbol == 0x08 ? -1 : 1);
-
-    if(posCommandLine < 0)
+    if(symbol == 0x08)
     {
-        posCommandLine = 0;
+        commandLine[posCommandLine] = ' ';
+        if(posCommandLine > 0)
+        {
+            posCommandLine--;
+        }
+        commandLine[posCommandLine] = '_';
+    }
+    else if(isascii(symbol))
+    {
+        commandLine[posCommandLine++] = symbol;
+        commandLine[posCommandLine] = '_';
     }
 }
 
@@ -138,18 +144,18 @@ void Console::WriteScreen()
     static bool first = true;
     if(first)
     {
-        for(int i = 0; i < WIDTH; i++)
+        for(int i = 0; i < WIDTH_CONSOLE; i++)
         {
             limiter[i] = '-';
         }
-        limiter[WIDTH + 1] = 0;
+        limiter[WIDTH_CONSOLE + 1] = 0;
         first = false;
     }
 
-    WriteString(0, HEIGHT - 2, limiter);
-    WriteString(0, HEIGHT - 5, limiter);
+    WriteString(0, HEIGHT_CONSOLE - 2, limiter);
+    WriteString(0, HEIGHT_CONSOLE - 5, limiter);
 
-    int dY = HEIGHT - 4;
+    int dY = HEIGHT_CONSOLE - 4;
 
     WriteRegisters(dY);
 
@@ -164,11 +170,11 @@ void Console::WriteRegisters(int dY)
 {
     REGS *regs = params.regs;
 
-    WriteString(35, HEIGHT - 3, "|");
-    WriteString(35, HEIGHT - 4, "|");
+    WriteString(35, HEIGHT_CONSOLE - 3, "|");
+    WriteString(35, HEIGHT_CONSOLE - 4, "|");
 
-    WriteString(53, HEIGHT - 3, "|");
-    WriteString(53, HEIGHT - 4, "|");
+    WriteString(53, HEIGHT_CONSOLE - 3, "|");
+    WriteString(53, HEIGHT_CONSOLE - 4, "|");
 
     WRITE8(0, dY, "A", regs->r8[ADDR_A]);
 
@@ -231,37 +237,36 @@ void Console::WriteFlags(int x, int y)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 void Console::WriteString(int x, int y, const char *str)
 {
-    size_t size = strlen(str);
+    int numCell = y * WIDTH_CONSOLE + x;
 
-    static CHAR_INFO buffer[1024];
-
-    static bool first = true;
-    if(first)
+    for(uint i = 0; i < strlen(str); i++)
     {
-        for(int i = 0; i < 1024; i++)
-        {
-            buffer[i].Attributes = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED;
-        }
-        first = false;
+        backBuffer[numCell++].Char.AsciiChar = str[i];
     }
-    
-    for(uint i = 0; i < size; i++)
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+void Console::WriteBackBuffer()
+{
+    for(int i = 0; i < WIDTH_CONSOLE; i++)
     {
-        buffer[i].Char.AsciiChar = str[i];
+        backBuffer[WIDTH_CONSOLE * (HEIGHT_CONSOLE - 1) + i].Char.AsciiChar = commandLine[i];
     }
 
     COORD buffSize;
-    buffSize.X = (SHORT)size;
-    buffSize.Y = 1;
+    buffSize.X = WIDTH_CONSOLE;
+    buffSize.Y = HEIGHT_CONSOLE;
 
-    static COORD buffCoord = {0, 0};
+    COORD buffCoord = {0, 0};
 
     SMALL_RECT region;
-    region.Left = (SHORT)x;
-    region.Top = region.Bottom = (SHORT)y;
-    region.Right = (SHORT)(x + size);
+    region.Left = 0;
+    region.Top = 0;
+    region.Right = WIDTH_CONSOLE - 1;
+    region.Bottom = HEIGHT_CONSOLE - 1;
 
-    WriteConsoleOutputA(outHandle, buffer, buffSize, buffCoord, &region);
+    WriteConsoleOutputA(outHandle, backBuffer, buffSize, buffCoord, &region);
 }
 
 
@@ -325,9 +330,9 @@ void Console::WriteListing()
     
     static char buffer[1024];
 
-    int numCommand = 0;
+    uint numCommand = 0;
 
-    for(size_t i = 0; i < HEIGHT - 7; i++)
+    for(size_t i = 0; i < HEIGHT_CONSOLE - 7; i++)
     {
         Command &command = commands[numCommand++];
         sprintf_s(buffer, 100, "%04X | ", command.address);
@@ -351,5 +356,15 @@ void Console::WriteListing()
             sprintf_s(buffer + strlen(buffer), 100, "%s |", WriteBinaryByte(command.opCodes[numCode]));
             WriteString(0, (int)i, buffer);
         }
+    }
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+void Console::ClearBackBuffer()
+{
+    for(int i = 0; i < WIDTH_CONSOLE * HEIGHT_CONSOLE; i++)
+    {
+        backBuffer[i].Char.AsciiChar = ' ';
     }
 }

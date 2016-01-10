@@ -10,8 +10,8 @@ public:
 
 private:
     HANDLE outHandle;
-    const SHORT WIDTH = 150;
-    const SHORT HEIGHT = 80;
+#define WIDTH_CONSOLE   150
+#define HEIGHT_CONSOLE  80
     int posCommandLine = 0;
 
     DWORD prevUpdate;
@@ -26,6 +26,12 @@ private:
     void WriteRegisters(int dY);
     void WriteListing();
     char* WriteBinaryByte(int value);
+    void ClearBackBuffer();
+    void WriteBackBuffer();
+
+    CHAR_INFO backBuffer[WIDTH_CONSOLE * HEIGHT_CONSOLE];
+
+    char commandLine[WIDTH_CONSOLE];
 
     Console &operator=(const Console&)
     {};
