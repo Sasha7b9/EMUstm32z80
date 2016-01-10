@@ -240,9 +240,7 @@ void DataBase::CreateReport()
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-string DataBase::GetString()
+std::vector<Command>& DataBase::GetCommands()
 {
-    char buffer[100];
-    sprintf_s(buffer, 100, "%d | %02X | ", commands[0].address, commands[0].opCodes[0]);
-    return string(buffer);
+    return commands;
 }

@@ -2,6 +2,7 @@
 
 
 #include "Console.h"
+#include "DataBase.h"
 
 
 extern "C"
@@ -13,6 +14,11 @@ extern "C"
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 extern OutStruct params;
 
+extern DataBase base;
+
+
+using std::vector;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Console::Console()
@@ -22,28 +28,29 @@ Console::Console()
     outHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
     CONSOLE_SCREEN_BUFFER_INFOEX info;
-    ZeroMemory(&info, sizeof(CONSOLE_SCREEN_BUFFER_INFOEX));
-    info.cbSize = sizeof(CONSOLE_SCREEN_BUFFER_INFOEX);
+    info.cbSize = sizeof(info);
+
+    GetConsoleScreenBufferInfoEx(outHandle, &info);
+
     info.dwSize.X = WIDTH;
     info.dwSize.Y = HEIGHT;
     info.dwCursorPosition.X = 10;
     info.dwCursorPosition.Y = 10;
-    info.wAttributes = FOREGROUND_BLUE;
     info.srWindow.Left = 0;
     info.srWindow.Top = 0;
     info.srWindow.Right = 150;
     info.srWindow.Bottom = 80;
     info.dwMaximumWindowSize.X = 150;
     info.dwMaximumWindowSize.Y = 80;
-    info.bFullscreenSupported = TRUE;
-    info.ColorTable[0] = RGB(32, 32, 32);
-    info.ColorTable[1] = RGB(255, 255, 255);
 
     SetConsoleScreenBufferInfoEx(outHandle, &info);
 
-    //BOOL res = SetConsoleTextAttribute(outHandle, BACKGROUND_INTENSITY | BACKGROUND_BLUE | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
-
     prevUpdate = GetTickCount();
+
+    COORD coord;
+    coord.X = (SHORT)posCommandLine;
+    coord.Y = HEIGHT - 1;
+    SetConsoleCursorPosition(outHandle, coord);
 }
 
 
@@ -52,8 +59,22 @@ bool Console::Update()
 {
     if(GetTickCount() - prevUpdate > 40)
     {
-        WriteRegisters();
+        DWORD timeEnter = GetTickCount();
+
+        int count = 10;
+
+        for(int i = 0; i < count; i++)
+        {
+            WriteScreen();
+        }
+
+        Write16bit(100, 0, (uint16)((GetTickCount() - timeEnter) / count));
+
         prevUpdate = GetTickCount();
+
+        COORD coord;
+        coord.X = (SHORT)posCommandLine;
+        coord.Y = HEIGHT - 1;
     }
 
     if(_kbhit())
@@ -86,6 +107,8 @@ void Console::AddToCommandLine(char symbol)
     char buffer[1];
     buffer[0] = symbol;
 
+    SetConsoleTextAttribute(outHandle, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
+
     WriteFile(outHandle, buffer, 1, NULL, NULL);
 
     posCommandLine = posCommandLine + (symbol == 0x08 ? -1 : 1);
@@ -109,23 +132,43 @@ void Console::AddToCommandLine(char symbol)
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-void Console::WriteRegisters()
+void Console::WriteScreen()
+{
+    static char limiter[1024];
+    static bool first = true;
+    if(first)
+    {
+        for(int i = 0; i < WIDTH; i++)
+        {
+            limiter[i] = '-';
+        }
+        limiter[WIDTH + 1] = 0;
+        first = false;
+    }
+
+    WriteString(0, HEIGHT - 2, limiter);
+    WriteString(0, HEIGHT - 5, limiter);
+
+    int dY = HEIGHT - 4;
+
+    WriteRegisters(dY);
+
+    WriteFlags(55, dY);
+
+    WriteListing();
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+void Console::WriteRegisters(int dY)
 {
     REGS *regs = params.regs;
-
-    for(int i = 0; i < WIDTH; i++)
-    {
-        WriteString(i, HEIGHT - 2, "-");
-        WriteString(i, HEIGHT - 5, "-");
-    }
 
     WriteString(35, HEIGHT - 3, "|");
     WriteString(35, HEIGHT - 4, "|");
 
     WriteString(53, HEIGHT - 3, "|");
     WriteString(53, HEIGHT - 4, "|");
-
-    int dY = HEIGHT - 4;
 
     WRITE8(0, dY, "A", regs->r8[ADDR_A]);
 
@@ -154,8 +197,6 @@ void Console::WriteRegisters()
     WRITE16(45, dY, "SP", regs->r16[ADDR_SP]);
 
     WRITE16(45, 1 + dY, "PC", regs->r16[ADDR_PC]);
-
-    WriteFlags(55, dY);
 }
 
 
@@ -173,26 +214,54 @@ void Console::WriteFlags(int x, int y)
 
     WRITE_FLAG(x + 2, y, "Z", 6);
 
-    WRITE_FLAG(x + 4, y, "H", 4);
+    WRITE_FLAG(x + 4, y, ".", 5);
 
-    WRITE_FLAG(x + 6, y, "PV", 2);
+    WRITE_FLAG(x + 6, y, "H", 4);
 
-    WRITE_FLAG(x + 9, y, "N", 1);
+    WRITE_FLAG(x + 8, y, ".", 3);
 
-    WRITE_FLAG(x + 11, y, "C", 0);
+    WRITE_FLAG(x + 10, y, "PV", 2);
+
+    WRITE_FLAG(x + 13, y, "N", 1);
+
+    WRITE_FLAG(x + 15, y, "C", 0);
 }
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-void Console::WriteString(int x, int y, char *str)
+void Console::WriteString(int x, int y, const char *str)
 {
-    COORD coord;
-    coord.X = (SHORT)x;
-    coord.Y = (SHORT)y;
+    size_t size = strlen(str);
 
-    SetConsoleCursorPosition(outHandle, coord);
-    //WriteFile(outHandle, str, strlen(str), NULL, NULL);
-    WriteConsoleA(outHandle, str, strlen(str), NULL, NULL);
+    static CHAR_INFO buffer[1024];
+
+    static bool first = true;
+    if(first)
+    {
+        for(int i = 0; i < 1024; i++)
+        {
+            buffer[i].Attributes = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED;
+        }
+        first = false;
+    }
+    
+    for(uint i = 0; i < size; i++)
+    {
+        buffer[i].Char.AsciiChar = str[i];
+    }
+
+    COORD buffSize;
+    buffSize.X = (SHORT)size;
+    buffSize.Y = 1;
+
+    static COORD buffCoord = {0, 0};
+
+    SMALL_RECT region;
+    region.Left = (SHORT)x;
+    region.Top = region.Bottom = (SHORT)y;
+    region.Right = (SHORT)(x + size);
+
+    WriteConsoleOutputA(outHandle, buffer, buffSize, buffCoord, &region);
 }
 
 
@@ -220,4 +289,67 @@ void Console::Write16bit(int x, int y, uint16 word)
     char buffer[5];
     sprintf_s(buffer, 5, "%04X", word);
     WriteString(x, y, buffer);
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+char* Console::WriteBinaryByte(int value)
+{
+    static char buffer[11] = "          ";
+
+    vector<uint8> bits;
+
+    for(int i = 0; i < 8; i++)
+    {
+        bits.push_back((uint8)(value % 2));
+        value /= 2;
+    }
+
+    buffer[0] = bits[7] + 0x30;
+    buffer[1] = bits[6] + 0x30;
+    buffer[3] = bits[5] + 0x30;
+    buffer[4] = bits[4] + 0x30;
+    buffer[5] = bits[3] + 0x30;
+    buffer[7] = bits[2] + 0x30;
+    buffer[8] = bits[1] + 0x30;
+    buffer[9] = bits[0] + 0x30;
+
+    return buffer;
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+void Console::WriteListing()
+{
+    vector<Command> &commands = base.GetCommands();
+    
+    static char buffer[1024];
+
+    int numCommand = 0;
+
+    for(size_t i = 0; i < HEIGHT - 7; i++)
+    {
+        Command &command = commands[numCommand++];
+        sprintf_s(buffer, 100, "%04X | ", command.address);
+        sprintf_s(buffer + strlen(buffer), 100, "%02X | ", command.opCodes[0]);
+        sprintf_s(buffer + strlen(buffer), 100, "%s | ", WriteBinaryByte(command.opCodes[0]));
+        if(command.bad)
+        {
+            sprintf_s(buffer + strlen(buffer), 100, "ERROR!!! BAD COMMAND!!! ERROR!!!!!!!");
+        }
+        else
+        {
+            sprintf_s(buffer + strlen(buffer), 100, "%s", command.mnemonic.c_str());
+        }
+
+        WriteString(0, (int)i, buffer);
+
+        for(uint numCode = 1; numCode < command.opCodes.size(); numCode++)
+        {
+            i++;
+            sprintf_s(buffer, 100, "     | %02X | ", command.opCodes[numCode]);
+            sprintf_s(buffer + strlen(buffer), 100, "%s |", WriteBinaryByte(command.opCodes[numCode]));
+            WriteString(0, (int)i, buffer);
+        }
+    }
 }

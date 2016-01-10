@@ -21,7 +21,7 @@ public:
 
     void CreateReport();
 
-    std::string GetString();
+    std::vector<Command>& GetCommands();
 
 private:
     std::vector<Command> commands;
