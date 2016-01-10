@@ -58,13 +58,10 @@ Console::Console()
         backBuffer[i].Attributes = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED;
     }
 
-    for(int i = 0; i < WIDTH_CONSOLE; i++)
-    {
-        commandLine[i] = ' ';
-    }
-
     CONSOLE_CURSOR_INFO cursorInfo = {1, 0};
     SetConsoleCursorInfo(outHandle, &cursorInfo);
+
+    ClearCommandLine();
 }
 
 
@@ -97,6 +94,11 @@ bool Console::Update()
         if(ch == 0xe0 || ch == 0x0)
         {
             _getch();
+            return true;
+        }
+        if(ch == 13)
+        {
+            RunCommand();
             return true;
         }
         
@@ -367,4 +369,56 @@ void Console::ClearBackBuffer()
     {
         backBuffer[i].Char.AsciiChar = ' ';
     }
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+void Console::RunCommand()
+{
+    if(strcmp(ExtractCommand(), "help") == 0)
+    {
+        ClearCommandLine();
+    }
+    else
+    {
+        ShowHint();
+    }
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+char *Console::ExtractCommand()
+{
+    static char buffer[WIDTH_CONSOLE + 1];
+
+    int i = 0;
+
+    while(commandLine[i] != '_')
+    {
+        buffer[i++] = commandLine[i];
+    }
+
+    buffer[i] = 0;
+
+    return buffer;
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+void Console::ClearCommandLine()
+{
+    posCommandLine = 0;
+
+    commandLine[0] = '_';
+    for(int i = 1; i < WIDTH_CONSOLE; i++)
+    {
+        commandLine[i] = ' ';
+    }
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+void Console::ShowHint()
+{
+
 }

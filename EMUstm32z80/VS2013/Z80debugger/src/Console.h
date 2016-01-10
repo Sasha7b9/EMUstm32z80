@@ -28,6 +28,10 @@ private:
     char* WriteBinaryByte(int value);
     void ClearBackBuffer();
     void WriteBackBuffer();
+    void RunCommand();
+    char* ExtractCommand();
+    void ClearCommandLine();
+    void ShowHint();
 
     CHAR_INFO backBuffer[WIDTH_CONSOLE * HEIGHT_CONSOLE];
 
