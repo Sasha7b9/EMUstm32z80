@@ -30,8 +30,8 @@ int LD_I_A(void)
     TACKTS = 9;
     AddAddress(PC);
 
-    strcpy(out->mnemonic, "LD I,A");
-    strcpy(out->transcript, "I<-A");
+    strcpy(MNEMONIC, "LD I,A");
+    strcpy(TRANSCRIPT, "I<-A");
     strcpy(COMMENT, "I - Interrupt Control Vector Register");
 
     return -1;
@@ -68,7 +68,7 @@ int LD_DD_pNN(void)
 
     uint8 retValue = prevPC;
 
-    sprintf(out->mnemonic, "LD %s,[%04X]", DD_45_Name(retValue), PC16andInc());
+    sprintf(MNEMONIC, "LD %s,[%04X]", DD_45_Name(retValue), PC16andInc());
 
     AddAddress(PC);
 
@@ -97,8 +97,8 @@ int LD_pNN_DD(void)
     uint16 address = PC16andInc();
     AddAddress(PC);
 
-    sprintf(out->mnemonic, "LD [%4X],%s", address, DD_45_Name(valDD));
-    sprintf(out->transcript, "[%4X]<-%s", address, DD_45_Name(prevPC));
+    sprintf(MNEMONIC, "LD [%4X],%s", address, DD_45_Name(valDD));
+    sprintf(TRANSCRIPT, "[%4X]<-%s", address, DD_45_Name(prevPC));
 
     return -1;
 
@@ -129,7 +129,7 @@ int LDIR(void)
 #ifdef LISTING
 
     AddAddress(PC);
-    strcpy(out->mnemonic, "LDIR");
+    strcpy(MNEMONIC, "LDIR");
     return -1;
 
 #else
@@ -164,7 +164,7 @@ int LDDR(void)
 #ifdef LISTING
 
     AddAddress(PC);
-    sprintf(out->mnemonic, "LDDR");
+    sprintf(MNEMONIC, "LDDR");
     return -1;
 
 #else
@@ -254,7 +254,7 @@ int NEG(void)
 #ifdef LISTING
 
     AddAddress(PC);
-    strcpy(out->mnemonic, "NEG");
+    strcpy(MNEMONIC, "NEG");
     return -1;
 
 #else
@@ -288,7 +288,7 @@ int IM1(void)
 #ifdef LISTING
 
     AddAddress(PC);
-    strcpy(out->mnemonic, "IM1");
+    strcpy(MNEMONIC, "IM1");
     return -1;
 
 #else
@@ -330,8 +330,8 @@ int SBC_HL_SS(void)
     TACKTS = 15;
     AddAddress(PC);
     strcpy(FLAGS, "++XXXV1+");
-    sprintf(out->mnemonic, "SBC HL,%s", SS_45_Name(prevPC));
-    sprintf(out->transcript, "HL<-HL-%s-CY", SS_45_Name(prevPC));
+    sprintf(MNEMONIC, "SBC HL,%s", SS_45_Name(prevPC));
+    sprintf(TRANSCRIPT, "HL<-HL-%s-CY", SS_45_Name(prevPC));
     return -1;
 
 #else
@@ -421,13 +421,13 @@ int IN_R_pC(void)
 
     if(((prevPC >> 3) & 7) != 6)
     {
-        sprintf(out->mnemonic, "IN %s,(C)", R8_HI_Name(prevPC));
-        sprintf(out->transcript, "%s<-(C)", R8_HI_Name(prevPC));
+        sprintf(MNEMONIC, "IN %s,(C)", R8_HI_Name(prevPC));
+        sprintf(TRANSCRIPT, "%s<-(C)", R8_HI_Name(prevPC));
         strcpy(COMMENT, "C - A0...A7, B - A8...A15");
     }
     else
     {
-        strcpy(out->mnemonic, "IN (HL), (C); R == 110, set flags only");
+        strcpy(MNEMONIC, "IN (HL), (C); R == 110, set flags only");
     }
     strcpy(FLAGS, "+ + X + X P 0 .");
     AddAddress(PC);
@@ -461,10 +461,10 @@ int INI(void)
 {
 #ifdef LISTING
 
-    strcpy(out->mnemonic, "INI");
+    strcpy(MNEMONIC, "INI");
     strcpy(COMMENT, "C - A0...A7, B - A8...A15; if B-1==0, Z set, else reset");
     strcpy(FLAGS, "X + X X X X 1 X");
-    strcpy(out->transcript, "(HL)<-(C); B--; HL++");
+    strcpy(TRANSCRIPT, "(HL)<-(C); B--; HL++");
     AddAddress(PC);
     return 0;
 
@@ -481,10 +481,10 @@ int INIR(void)
 {
 #ifdef LISTING
 
-    strcpy(out->mnemonic, "INIR");
+    strcpy(MNEMONIC, "INIR");
     strcpy(COMMENT, "C - A0...A7, B - A8...A15; z set only after finishing instruction");
     strcpy(FLAGS, "X 1 X X X X X 1 ");
-    strcpy(out->transcript, "(HL)<-(C); B--; HL++; while B!=0");
+    strcpy(TRANSCRIPT, "(HL)<-(C); B--; HL++; while B!=0");
     AddAddress(PC);
     return 0;
 
@@ -501,8 +501,8 @@ int IND(void)
 {
 #ifdef LISTING
 
-    strcpy(out->mnemonic, "IND");
-    strcpy(out->transcript, "(HL)<-(C); B--; HL--");
+    strcpy(MNEMONIC, "IND");
+    strcpy(TRANSCRIPT, "(HL)<-(C); B--; HL--");
     AddAddress(PC);
     return 0;
 
@@ -519,8 +519,8 @@ int INDR(void)
 {
 #ifdef LISTING
 
-    strcpy(out->mnemonic, "INDR");
-    strcpy(out->transcript, "(HL)<-(C); B--; HL--; while B!=0");
+    strcpy(MNEMONIC, "INDR");
+    strcpy(TRANSCRIPT, "(HL)<-(C); B--; HL--; while B!=0");
     AddAddress(PC);
     return 0;
 
@@ -537,8 +537,8 @@ int OUT_pC_R(void)
 {
 #ifdef LISTING
 
-    sprintf(out->mnemonic, "OUT (C), %s", R8_HI_Name(prevPC));
-    sprintf(out->transcript, "(C)<-%s", R8_HI_Name(prevPC));
+    sprintf(MNEMONIC, "OUT (C), %s", R8_HI_Name(prevPC));
+    sprintf(TRANSCRIPT, "(C)<-%s", R8_HI_Name(prevPC));
     return 0;
 
 #else

@@ -53,7 +53,7 @@ __declspec(dllexport) int __cdecl Decode(int address)
 {
     out->numAddresses = 0;
     out->numOpCodes = 0;
-    out->transcript[0] = 0;
+    TRANSCRIPT[0] = 0;
     out->flags[0] = 0;
     out->tackts = 0;
     out->comment[0] = 0;

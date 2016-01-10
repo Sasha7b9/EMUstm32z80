@@ -50,7 +50,7 @@ int LD_IX_NN(void)
     AddOpcode(RAM8(PC));
     AddOpcode(RAM8(PC));
     AddAddress(PC + 2);
-    sprintf(out->mnemonic, "LD IX,%04X", PC16andInc());
+    sprintf(MNEMONIC, "LD IX,%04X", PC16andInc());
     return -1;
 
 #else
@@ -135,7 +135,7 @@ int ADD_IX_PP(void)
 #ifdef LISTING
 
     AddAddress(PC);
-    sprintf(out->mnemonic, "ADD IX,%s", PP_45_Name(prevPC));
+    sprintf(MNEMONIC, "ADD IX,%s", PP_45_Name(prevPC));
     return -1;
 
 #else
@@ -167,7 +167,7 @@ int JP_pIX(void)
 {
 #ifdef LISTING
 
-    strcpy(out->mnemonic, "JP [IX]");
+    strcpy(MNEMONIC, "JP [IX]");
     return -1;
 
 #else
@@ -197,7 +197,7 @@ int RLC_pIX_D_and_BIT_B_pIX_D_and_SET_B_pIX_D_RES_B_pIX_D(void)
 
     if ((valBit & 0xc7) == 0x86)    // RES b, [IX + d]
     {
-        sprintf(out->mnemonic, "RES %d,[IX+%02X]", bit, valD);
+        sprintf(MNEMONIC, "RES %d,[IX+%02X]", bit, valD);
         return -1;
     }
 

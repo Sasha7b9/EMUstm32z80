@@ -23,7 +23,7 @@ int BIT_B_R(void)
 #ifdef LISTING
 
     AddAddress(PC);
-    sprintf(out->mnemonic, "BIT %d,%s", (prevPC >> 3) & 7, R8_LO_Name(prevPC));
+    sprintf(MNEMONIC, "BIT %d,%s", (prevPC >> 3) & 7, R8_LO_Name(prevPC));
     return -1;
 
 #else
@@ -40,7 +40,7 @@ int CRL_R(void)
 #ifdef LISTING
 
     AddAddress(PC);
-    sprintf(out->mnemonic, "SRL %s", R8_LO_Name(prevPC));
+    sprintf(MNEMONIC, "SRL %s", R8_LO_Name(prevPC));
     return -1;
 
 #else
@@ -57,7 +57,7 @@ int CRL_pHL(void)
 #ifdef LISTING
 
     AddAddress(PC);
-    strcpy(out->mnemonic, "SRL [HL]");
+    strcpy(MNEMONIC, "SRL [HL]");
     return -1;
 
 #else
@@ -89,7 +89,7 @@ int RES_B_M(void)
 
     AddAddress(PC);
     uint8 numBit = (prevPC >> 3) & 7;
-    sprintf(out->mnemonic, "RES %d,%s", numBit, R8_LO_Name(prevPC));
+    sprintf(MNEMONIC, "RES %d,%s", numBit, R8_LO_Name(prevPC));
     return -1;
 
 #else
@@ -107,7 +107,7 @@ int RES_B_pHL(void)
 
     AddAddress(PC);
     uint8 numBit = (prevPC >> 3) & 7;
-    sprintf(out->mnemonic, "RES %d,[HL]", numBit);
+    sprintf(MNEMONIC, "RES %d,[HL]", numBit);
     return -1;
 
 #else
@@ -124,7 +124,7 @@ int SET_B_R(void)
 #ifdef LISTING
 
     AddAddress(PC);
-    sprintf(out->mnemonic, "SET %d,%s", (prevPC >> 3) & 7, R8_LO_Name(prevPC));
+    sprintf(MNEMONIC, "SET %d,%s", (prevPC >> 3) & 7, R8_LO_Name(prevPC));
     return -1;
 
 #else
@@ -141,7 +141,7 @@ int SET_B_pHL(void)
 #ifdef LISTING
 
     AddAddress(PC);
-    sprintf(out->mnemonic, "SET %d,[HL]", (prevPC >> 3) & 7);
+    sprintf(MNEMONIC, "SET %d,[HL]", (prevPC >> 3) & 7);
     return -1;
 
 #else
@@ -158,7 +158,7 @@ int RL_R(void)
 #ifdef LISTING
 
     AddAddress(PC);
-    sprintf(out->mnemonic, "RL %s", R8_LO_Name(prevPC));
+    sprintf(MNEMONIC, "RL %s", R8_LO_Name(prevPC));
     return -1;
 
 #else
@@ -175,7 +175,7 @@ int RR_R(void)
 #ifdef LISTING
 
     AddAddress(PC);
-    sprintf(out->mnemonic, "RR %s", R8_LO_Name(prevPC));
+    sprintf(MNEMONIC, "RR %s", R8_LO_Name(prevPC));
     return -1;
 
 #else

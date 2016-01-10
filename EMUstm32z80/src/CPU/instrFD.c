@@ -15,7 +15,7 @@ int INC_pIY_D(void)
 #ifdef LISTING
 
     AddOpcode(RAM8(PC));
-    sprintf(out->mnemonic, "INC [IY+%02X]", PCandInc());
+    sprintf(MNEMONIC, "INC [IY+%02X]", PCandInc());
     AddAddress(PC);
     return -1;
 
@@ -33,7 +33,7 @@ int DEC_pIY_D(void)
 #ifdef LISTING
 
     AddOpcode(RAM8(PC));
-    sprintf(out->mnemonic, "DEC (IY+%d)", PCandInc());
+    sprintf(MNEMONIC, "DEC (IY+%d)", PCandInc());
     AddAddress(PC);
     return -1;
 
@@ -53,7 +53,7 @@ int LD_pIY_D_R(void)
     AddOpcode(RAM8(PC));
 
     char *reg = R8_LO_Name(prevPC);
-    sprintf(out->mnemonic, "LD (IY+%d), %s", PCandInc(), reg);
+    sprintf(MNEMONIC, "LD (IY+%d), %s", PCandInc(), reg);
 
     AddAddress(PC);
 
@@ -79,7 +79,7 @@ int LD_IY_NN(void)
 
     AddAddress(PC);
 
-    sprintf(out->mnemonic, "LD IY,%04x", NN);
+    sprintf(MNEMONIC, "LD IY,%04x", NN);
 
     return -1;
 
@@ -109,17 +109,17 @@ int SET_B_pIY_D_RES_pIY_D_BIT_B_pIY_D(void)
 
     if((valBit & 0xc7) == 0xc6)       // SET B, (IY + D)
     {
-        sprintf(out->mnemonic, "SET %d,[IY+%02X]", bit, valD);
+        sprintf(MNEMONIC, "SET %d,[IY+%02X]", bit, valD);
         return -1;
     }
     else if((valBit & 0xc7) == 0x86)  // RES B, (IY + D)
     {
-        sprintf(out->mnemonic, "RES %d,[IY+%02X]", bit, valD);
+        sprintf(MNEMONIC, "RES %d,[IY+%02X]", bit, valD);
         return -1;
     }
     else if((valBit & 0xc7) == 0x46)  // BIT B, (IY + D)
     {
-        sprintf(out->mnemonic, "BIT %d,[IY+%02X]", bit, valD);
+        sprintf(MNEMONIC, "BIT %d,[IY+%02X]", bit, valD);
         return -1;
     }
 
@@ -146,7 +146,7 @@ int LD_pIY_D_N(void)
     uint8 valD = PCandInc();
     uint8 valN = PCandInc();
 
-    sprintf(out->mnemonic, "LD [IY+%02X],%02X", valD, valN);
+    sprintf(MNEMONIC, "LD [IY+%02X],%02X", valD, valN);
 
     return -1;
 
@@ -165,7 +165,7 @@ int SUB_pIY_D(void)
 
     AddOpcode(RAM8(PC));
     AddAddress(PC + 1);
-    sprintf(out->mnemonic, "SUB (IY+0x%02x)", PCandInc());
+    sprintf(MNEMONIC, "SUB (IY+0x%02x)", PCandInc());
     return -1;
 
 #else
@@ -184,7 +184,7 @@ int LD_R_pIY_D(void)
     uint8 valReg = prevPC;
     AddOpcode(RAM8(PC));
     AddAddress(PC + 1);
-    sprintf(out->mnemonic, "LD %s,[IY+%02X]", R8_HI_Name(valReg), PCandInc());
+    sprintf(MNEMONIC, "LD %s,[IY+%02X]", R8_HI_Name(valReg), PCandInc());
     return -1;
 
 #else
@@ -202,7 +202,7 @@ int ADD_A_pIY_D(void)
 
     AddOpcode(RAM8(PC));
     AddAddress(PC + 1);
-    sprintf(out->mnemonic, "ADD A,[IY+%02X]", prevPC);
+    sprintf(MNEMONIC, "ADD A,[IY+%02X]", prevPC);
     return -1;
 
 #else
@@ -220,7 +220,7 @@ int CP_pIY_D(void)
 
     AddAddress(PC + 1);
     AddOpcode(RAM8(PC));
-    sprintf(out->mnemonic, "CP [IY+%02X]", PCandInc());
+    sprintf(MNEMONIC, "CP [IY+%02X]", PCandInc());
     return -1;
 
 #else
@@ -238,7 +238,7 @@ int XOR_pIY_D(void)
 
     AddOpcode(RAM8(PC + 1));
     AddAddress(PC + 1);
-    sprintf(out->mnemonic, "XOR [IY+%02X]", PCandInc());
+    sprintf(MNEMONIC, "XOR [IY+%02X]", PCandInc());
     return -1;
 
 #else
