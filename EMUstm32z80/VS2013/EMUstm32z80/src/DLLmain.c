@@ -11,18 +11,13 @@
 
 #include "CPU/instr.h"
 #include "CPU/registers.h"
+#include "common.h"
 
 
-uint8 *RAM;
-char *mnemonic;
-char *comment;
-char *flags;
-char *transcript;
-uint *addresses;
-int *numAddresses;
-uint8 *opCodes;
-int *numOpCodes;
-int *tackts;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+OutStruct *out = 0;
+
+uint8 *RAM = 0;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,50 +39,24 @@ __declspec(dllexport) BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-__declspec(dllexport) void __cdecl Init
-(
-    uint8 eRAM[65535],
-    char eMnemonic[100],
-    char eComment[100],
-    char eFlags[100],
-    char eTranscript[100],
-    uint eAddresses[10],
-    int *eNumAddresses,
-    uint8 eOpCodes[10],
-    int *eNumOpCodes,
-    int *eTackts,
-    REGS **regs_,
-    REGS **regsAlt_
-)
+__declspec(dllexport) void __cdecl InitEMU(OutStruct *out_)
 {
-    RAM = eRAM;
-    mnemonic = eMnemonic;
-    comment = eComment;
-    flags = eFlags;
-    transcript = eTranscript;
-
-    addresses = eAddresses;
-    numAddresses = eNumAddresses;
-
-    opCodes = eOpCodes;
-    numOpCodes = eNumOpCodes;
-
-    tackts = eTackts;
-
-    *regs_ = &regs;
-    *regsAlt_ = &regsAlt;
+    out = out_;
+    out->regs = &regs;
+    out->regsAlt = &regsAlt;
+    RAM = out->RAM;
 }
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-__declspec(dllexport) int Decode(int address)
+__declspec(dllexport) int __cdecl Decode(int address)
 {
-    *numAddresses = 0;
-    *numOpCodes = 0;
-    *transcript = 0;
-    *flags = 0;
-    *tackts = 0;
-    *comment = 0;
+    out->numAddresses = 0;
+    out->numOpCodes = 0;
+    out->transcript[0] = 0;
+    out->flags[0] = 0;
+    out->tackts = 0;
+    out->comment[0] = 0;
 
     PC = (uint16)address;
 

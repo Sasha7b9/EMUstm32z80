@@ -19,7 +19,7 @@
 int DAA_dec(void)
 {
     AddAddress(PC);
-    strcpy(mnemonic, "DAA");
+    strcpy(out->mnemonic, "DAA");
     return -1;
 }
 

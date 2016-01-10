@@ -23,15 +23,15 @@ static int RLC_RRC(TypeOperand type, char *r, uint8 byte)
 
     if (type == Operand_A)
     {
-        sprintf(mnemonic, "%sA", r);
+        sprintf(out->mnemonic, "%sA", r);
     }
     else if (type == Operand_Reg8)
     {
-        sprintf(mnemonic, "%s %s", r, R8_LO_Name(prevPC));
+        sprintf(out->mnemonic, "%s %s", r, R8_LO_Name(prevPC));
     }
     else if (type == Operand_pHL)
     {
-        sprintf(mnemonic, "%s [HL]", r);
+        sprintf(out->mnemonic, "%s [HL]", r);
     }
     else
     {
@@ -39,11 +39,11 @@ static int RLC_RRC(TypeOperand type, char *r, uint8 byte)
 
         if (RAM[PC - 1] == byte)
         {
-            sprintf(mnemonic, "%s [%s+%02X]", r, name, RAM[PC - 2]);
+            sprintf(out->mnemonic, "%s [%s+%02X]", r, name, RAM[PC - 2]);
         }
         else
         {
-            sprintf(mnemonic, "%s [%s+%02X]->%s", r, name, RAM[PC - 2], R8_LO_Name(RAM[PC - 1]));
+            sprintf(out->mnemonic, "%s [%s+%02X]->%s", r, name, RAM[PC - 2], R8_LO_Name(RAM[PC - 1]));
         }
     }
     return -1;

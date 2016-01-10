@@ -13,34 +13,26 @@ extern "C"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-char mnemonic[100];
-char comment[100];
-char flags[100];
-char transcript[100];
-uint addresses[10];
-int numAddresses;
-uint8 opCodes[10];
-int numOpCodes;
-int tackts;
-
-REGS *regs;
-REGS *regsAlt;
-
 DataBase base;
+
+OutStruct params;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main()
 {
-    Init(RAM48, mnemonic, comment, flags, transcript, addresses, &numAddresses, opCodes, &numOpCodes, &tackts, &regs, &regsAlt);
+    params.RAM = RAM48;
+
+    InitEMU(&params);
 
     int address = base.NextAddress();
 
     while(address >= 0)
     {
+        std::cout << std::hex << address << std::endl;
         bool res = Decode((uint16)address) != 0;
 
-        base.AddNewData(res, address, mnemonic, comment, flags, transcript, addresses, numAddresses, opCodes, numOpCodes, tackts);
+        base.AddNewData(res, address, &params);
 
         address = base.NextAddress();
     }

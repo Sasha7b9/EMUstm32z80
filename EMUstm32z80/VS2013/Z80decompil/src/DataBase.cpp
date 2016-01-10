@@ -34,8 +34,7 @@ int DataBase::NextAddress()
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-void DataBase::AddNewData(bool succsefull, int address, char mnemonic[100], char comment[100], char flags[100], char transcript[100], uint addresses[10],
-                          int numAddresses, uint8 opCodes[10], int numOpCodes, int tackts)
+void DataBase::AddNewData(bool succsefull, int address, OutStruct *params)
 {
     RemoveScanAddress(address);
 
@@ -43,29 +42,29 @@ void DataBase::AddNewData(bool succsefull, int address, char mnemonic[100], char
     
     command.address = address;
 
-    for(int i = 0; i < numOpCodes; i++)
+    for(int i = 0; i < params->numOpCodes; i++)
     {
-        command.opCodes.push_back(opCodes[i]);
+        command.opCodes.push_back(params->opCodes[i]);
     }
 
     if(succsefull)
     {
-        command.numTackts = tackts;
+        command.numTackts = params->tackts;
 
-        command.mnemonic = std::string(mnemonic);
+        command.mnemonic = std::string(params->mnemonic);
 
-        for(int i = 0; i < numAddresses; i++)
+        for(int i = 0; i < params->numAddresses; i++)
         {
-            AddScanAddress((int)addresses[i]);
+            AddScanAddress((int)params->addresses[i]);
         }
 
-        command.transcript = string(transcript);
+        command.transcript = string(params->transcript);
 
-        command.flags = string(flags);
+        command.flags = string(params->flags);
 
-        command.comment = string(comment);
+        command.comment = string(params->comment);
 
-        command.tackts = tackts;
+        command.tackts = params->tackts;
     }
     else
     {

@@ -43,6 +43,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
         {
             char ch = _getch();
             WriteFile(outHandle, "a", 1, &numWritten, NULL);
+            COORD coord;
+            coord.X = rand() % 150;
+            coord.Y = rand() % 80;
+            SetConsoleCursorPosition(outHandle, coord);
         }
     };
 }
