@@ -85,6 +85,7 @@
   <ItemGroup>
     <ClCompile Include="src\Command.cpp" />
     <ClCompile Include="src\Console.cpp" />
+    <ClCompile Include="src\ConsoleCommand.cpp" />
     <ClCompile Include="src\DataBase.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\RAM48.c">
@@ -97,6 +98,7 @@
   <ItemGroup>
     <ClInclude Include="src\Command.h" />
     <ClInclude Include="src\Console.h" />
+    <ClInclude Include="src\ConsoleCommand.h" />
     <ClInclude Include="src\DataBase.h" />
     <ClInclude Include="src\defines.h" />
     <ClInclude Include="src\main.h" />

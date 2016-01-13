@@ -1,14 +1,20 @@
 #pragma once
 
 
+class CommandConsole;
+
+
 class Console
 {
+    friend class CommandConsole;
 public:
     Console();
 
     bool Update();
 
 private:
+    CommandConsole *command = nullptr;
+
     HANDLE outHandle;
 #define WIDTH_CONSOLE   150
 #define HEIGHT_CONSOLE  80
@@ -28,7 +34,6 @@ private:
     char* WriteBinaryByte(int value);
     void ClearBackBuffer();
     void WriteBackBuffer();
-    void RunCommand();
     char* ExtractCommand();
     void ClearCommandLine();
     void ShowHint();

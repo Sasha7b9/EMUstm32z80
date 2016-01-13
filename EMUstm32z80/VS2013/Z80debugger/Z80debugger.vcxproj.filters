@@ -8,6 +8,7 @@
     <ClInclude Include="src\defines.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\Console.h" />
+    <ClInclude Include="src\ConsoleCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
@@ -16,5 +17,6 @@
     <ClCompile Include="src\RAM48.c" />
     <ClCompile Include="src\stdafx.cpp" />
     <ClCompile Include="src\Console.cpp" />
+    <ClCompile Include="src\ConsoleCommand.cpp" />
   </ItemGroup>
 </Project>

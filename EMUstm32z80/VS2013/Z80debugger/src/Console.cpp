@@ -3,6 +3,7 @@
 
 #include "Console.h"
 #include "DataBase.h"
+#include "ConsoleCommand.h"
 
 
 extern "C"
@@ -23,6 +24,8 @@ using std::vector;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Console::Console()
 {
+    command = new CommandConsole(this);
+
     AllocConsole();
 
     outHandle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -98,7 +101,7 @@ bool Console::Update()
         }
         if(ch == 13)
         {
-            RunCommand();
+            command->Run(ExtractCommand());
             return true;
         }
         
@@ -368,20 +371,6 @@ void Console::ClearBackBuffer()
     for(int i = 0; i < WIDTH_CONSOLE * HEIGHT_CONSOLE; i++)
     {
         backBuffer[i].Char.AsciiChar = ' ';
-    }
-}
-
-
-//------------------------------------------------------------------------------------------------------------------------------------------------------
-void Console::RunCommand()
-{
-    if(strcmp(ExtractCommand(), "help") == 0)
-    {
-        ClearCommandLine();
-    }
-    else
-    {
-        ShowHint();
     }
 }
 
