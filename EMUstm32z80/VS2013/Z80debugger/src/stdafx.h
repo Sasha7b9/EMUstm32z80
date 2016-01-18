@@ -25,6 +25,9 @@
 #include <time.h>
 
 
+using std::vector;
+
+
 #pragma warning(pop)
 
 

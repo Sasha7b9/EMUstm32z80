@@ -85,21 +85,39 @@ bool Console::Update()
     if(_kbhit())
     {
         int ch = _getch();
-        if(ch == 27)
+        if(ch == 27)                // ESC, return
         {
             return false;
         }
-        if(ch == 0x08)
+        if(ch == 0x08)              // Backspace
         {
             AddToCommandLine(0x08);
             AddToCommandLine(' ');
         }
-        if(ch == 0xe0 || ch == 0x0)
+        if(ch == 0xe0 || ch == 0x0) // Control or functional key
         {
-            _getch();
+            int ch2 = _getch();
+
+            if(ch2 == 72)           // UP
+            {
+                command->ShowNext();
+            }
+            else if(ch2 == 80)      // DOWN
+            {
+                command->ShowPrev();
+            }
+            else if(ch2 == 75)      // LEFT
+            {
+
+            }
+            else if(ch2 == 77)      // RIGHT
+            {
+
+            }
+
             return true;
         }
-        if(ch == 13)
+        if(ch == 13)                // Enter
         {
             command->Run(ExtractCommand());
             return true;
@@ -107,7 +125,7 @@ bool Console::Update()
         
         AddToCommandLine((char)ch);
     }
-    return true;
+    return running;
 }
 
 

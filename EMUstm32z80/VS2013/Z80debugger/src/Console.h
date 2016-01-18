@@ -19,6 +19,7 @@ private:
 #define WIDTH_CONSOLE   150
 #define HEIGHT_CONSOLE  80
     int posCommandLine = 0;
+    bool running = true;
 
     DWORD prevUpdate;
 
