@@ -2,6 +2,8 @@
 *.opensdf
 report.txt
 *.suo
+*.uvoptx
+*.uvguix.Sasha
 
 Emustm32z80/VS2013/Debug/report.txt
 EMUstm32z80/VS2013/Z80decompil/report.txt
