@@ -2,7 +2,7 @@
 
 #include "defines.h"
 
-#include "CPU/registers.h"
+#include "registers.h"
 
 #include "Hardware/ports.h"
 
