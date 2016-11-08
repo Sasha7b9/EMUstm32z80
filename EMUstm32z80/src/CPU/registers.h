@@ -77,35 +77,35 @@ extern uint8 imfB;
 #define I       regI
 #define R       regR
 
-#define SF      (GET_BIT(F, 7))
+#define SF      (GET_nBIT(F, 7))
 #define SET_S   (F |= 0x80)
 #define RES_S   (F &= ~0x80)
 #define CALC_S(value)   if(value & 0x80) (F |= 0x80); else (F &= ~(0x80));
 
-#define ZF      (GET_BIT(F, 6))
+#define ZF      (GET_nBIT(F, 6))
 #define SET_Z   (F |= 0x40)
 #define RES_Z   (F &= ~0x40)
 #define CALC_Z(value)   if(value) (F &= ~(0x40)); else (F |= 0x40);
 #define LOAD_Z(value)   if(value) SET_Z; else RES_Z;
 
-#define HF      (GET_BIT(F, 4))
+#define HF      (GET_nBIT(F, 4))
 #define SET_H   (F |= 0x10)
 #define RES_H   (F &= ~0x10)
 
-#define PF      (GET_BIT(F, 2))
+#define PF      (GET_nBIT(F, 2))
 #define SET_P   (F |= 4)
-#define RES_P   (RES_BIT(F, 2))
+#define RES_P   (RES_nBIT(F, 2))
 #define CALC_P(value)  (IsEven(value))
 
-#define VF      (GET_BIT(F, 2))
-#define SET_V   (SET_BIT(F, 2))
-#define RES_V   (RES_BIT(F, 2))
+#define VF      (GET_nBIT(F, 2))
+#define SET_V   (SET_nBIT(F, 2))
+#define RES_V   (RES_nBIT(F, 2))
 
-#define NF      (GET_BIT(F, 1))
+#define NF      (GET_nBIT(F, 1))
 #define SET_N   (F |= 0x02)
 #define RES_N   (F &= 0x02)
 
-#define CF      (GET_BIT(F, 0))
+#define CF      (GET_nBIT(F, 0))
 #define SET_C   (F |= 0x01)
 #define RES_C   (F &= ~0x01)
 #define LOAD_C(value)  if(value) SET_C; else RES_C

@@ -288,10 +288,10 @@ int RRCA_dec(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int RRCA_run(void)
 {
-    uint8 loBit = GET_BIT(A, 0);
+    uint8 loBit = GET_nBIT(A, 0);
 
     A >>= 1;
-    LOAD_BIT(A, 7, loBit);
+    LOAD_nBIT(A, 7, loBit);
     LOAD_C(loBit);
 
     // . . x 0 x . 0 +
@@ -363,12 +363,12 @@ int RLA_dec(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int RLA_run(void)
 {
-    uint8 hiBit = GET_BIT(A, 7);
+    uint8 hiBit = GET_nBIT(A, 7);
     uint8 oldCY = CF;
 
     A <<= 1;
     LOAD_C(hiBit);
-    LOAD_BIT(A, 0, oldCY);
+    LOAD_nBIT(A, 0, oldCY);
 
     // . . x 0 x . 0 +
     RES_H;
@@ -446,11 +446,11 @@ int RRA_dec(void)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int RRA_run(void)
 {
-    uint8 loBit = GET_BIT(A, 0);
+    uint8 loBit = GET_nBIT(A, 0);
     uint8 oldCY = CF;
 
     A >>= 1;
-    LOAD_BIT(A, 7, oldCY);
+    LOAD_nBIT(A, 7, oldCY);
     LOAD_C(loBit);
 
     // . . x 0 x . 0 +

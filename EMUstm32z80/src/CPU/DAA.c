@@ -303,7 +303,7 @@ int DAA_run(void)
 
     uint16 newCF = (value >> 8) & 1;
 
-    if(GET_BIT(newCF, 0))
+    if(GET_nBIT(newCF, 0))
     {
         SET_C;
     }
