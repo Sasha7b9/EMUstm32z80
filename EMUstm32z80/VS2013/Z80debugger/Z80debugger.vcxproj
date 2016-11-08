@@ -41,8 +41,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\My\EMUstm32z80\EMUstm32z80\VS2013\EMUstm32z80\src;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\My\EMUstm32z80\EMUstm32z80\VS2013\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\src;..\..\VS2013\EMUstm32z80\src;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\VS2013\Debug;$(LibraryPath)</LibraryPath>
     <OutDir>..\Debug\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
