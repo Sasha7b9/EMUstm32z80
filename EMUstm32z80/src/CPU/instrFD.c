@@ -92,11 +92,10 @@ int LD_IY_NN(void)
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
-int SET_B_pIY_D_RES_pIY_D_BIT_B_pIY_D(void)
+int DecodeCommandFDCB(void)
 {
-    return RunThridLevel(IR_IY);
+    //return RunThridLevel(IR_IY);
 
-    /*
 #ifdef LISTING
 
     AddOpcode(RAM8(PC));
@@ -130,7 +129,6 @@ int SET_B_pIY_D_RES_pIY_D_BIT_B_pIY_D(void)
     return 0;
 
 #endif
-    */
 }
 
 

@@ -19,6 +19,9 @@ DataBase::DataBase()
     addressesForScan.push_back(0x28);
     addressesForScan.push_back(0x30);
     addressesForScan.push_back(0x38);
+
+    addressesForScan.push_back(0x66);
+    addressesForScan.push_back(0x03f8);
 }
 
 
