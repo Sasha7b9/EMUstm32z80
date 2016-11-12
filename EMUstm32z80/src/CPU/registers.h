@@ -91,6 +91,7 @@ extern uint8 imfB;
 #define HF      (GET_nBIT(F, 4))
 #define SET_H   (F |= 0x10)
 #define RES_H   (F &= ~0x10)
+#define CALC_H(before, after) if(CalculateH(before, after)) (F |= 0x10); else (F &= ~(0x10));
 
 #define PF      (GET_nBIT(F, 2))
 #define SET_P   (F |= 4)
@@ -100,10 +101,11 @@ extern uint8 imfB;
 #define VF      (GET_nBIT(F, 2))
 #define SET_V   (SET_nBIT(F, 2))
 #define RES_V   (RES_nBIT(F, 2))
+#define LOAD_V(load) if(load) SET_V; else RES_V;
 
 #define NF      (GET_nBIT(F, 1))
 #define SET_N   (F |= 0x02)
-#define RES_N   (F &= 0x02)
+#define RES_N   (F &= ~(0x02))
 
 #define CF      (GET_nBIT(F, 0))
 #define SET_C   (F |= 0x01)

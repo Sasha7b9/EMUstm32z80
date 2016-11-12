@@ -18,5 +18,5 @@ void AddOpcode(uint8 code)
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 bool CalculateH(uint8 before, uint8 after)
 {
-
+    return GET_nBIT(before, 4) != GET_nBIT(after, 4);
 }

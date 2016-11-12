@@ -13,61 +13,23 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static int RLC_RRC(TypeOperand type, char *r, uint8 byte)
+static int RLC_RRC(TypeOperand type, uint8 byte)
 {
-    // + + X 0 X P 0 +
-
-#ifdef LISTING
-
-    AddAddress(PC);
-
-    if (type == Operand_A)
-    {
-        sprintf(MNEMONIC, "%sA", r);
-    }
-    else if (type == Operand_Reg8)
-    {
-        sprintf(MNEMONIC, "%s %s", r, R8_LO_Name(prevPC));
-    }
-    else if (type == Operand_pHL)
-    {
-        sprintf(MNEMONIC, "%s [HL]", r);
-    }
-    else
-    {
-        char *name = type == Operand_IX ? "IX" : "IY";
-
-        if (RAM[PC - 1] == byte)
-        {
-            sprintf(MNEMONIC, "%s [%s+%02X]", r, name, RAM[PC - 2]);
-        }
-        else
-        {
-            sprintf(MNEMONIC, "%s [%s+%02X]->%s", r, name, RAM[PC - 2], R8_LO_Name(RAM[PC - 1]));
-        }
-    }
-    return -1;
-
-#else
-
 #define RUN_RLC_RRC()                           \
     if(byte == 0x06)                            \
     {                                           \
-        uint8 hiBit = GET_BIT(*pOperand, 7);    \
+        uint8 hiBit = GET_nBIT(*pOperand, 7);   \
         (*pOperand) <<= 1;                      \
-        LOAD_BIT(*pOperand, 0, hiBit);          \
+        LOAD_nBIT(*pOperand, 0, hiBit);         \
         LOAD_C(hiBit);                          \
     }                                           \
     else                                        \
     {                                           \
-        uint8 loBit = GET_BIT(*pOperand, 0);    \
+        uint8 loBit = GET_nBIT(*pOperand, 0);   \
         (*pOperand) >>= 1;                      \
-        LOAD_BIT(*pOperand, 7, loBit);          \
+        LOAD_nBIT(*pOperand, 7, loBit);         \
         LOAD_C(loBit);                          \
     }                                           \
-    CALC_S(*pOperand);                          \
-    CALC_Z(*pOperand);                          \
-    CALC_P(*pOperand);                          \
     RES_H;                                      \
     RES_N;
 
@@ -112,20 +74,18 @@ static int RLC_RRC(TypeOperand type, char *r, uint8 byte)
     }
 
     return 0;
-
-#endif
 }
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int RLC(TypeOperand type)
 {
-    return RLC_RRC(type, "RLC", 0x06);
+    return RLC_RRC(type, 0x06);
 }
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 int RRC(TypeOperand type)
 {
-    return RLC_RRC(type, "RRC", 0x0e);
+    return RLC_RRC(type, 0x0e);
 }
