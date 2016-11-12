@@ -16,3 +16,4 @@ extern OutStruct *out;
 
 void AddAddress(uint address);
 void AddOpcode(uint8 code);
+bool CalculateH(uint8 before, uint8 after); // Вычисление флага дополнительного переноса

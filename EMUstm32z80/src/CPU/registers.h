@@ -86,7 +86,7 @@ extern uint8 imfB;
 #define SET_Z   (F |= 0x40)
 #define RES_Z   (F &= ~0x40)
 #define CALC_Z(value)   if(value) (F &= ~(0x40)); else (F |= 0x40);
-#define LOAD_Z(value)   if(value) SET_Z; else RES_Z;
+//#define LOAD_Z(value)   if(value) SET_Z; else RES_Z;
 
 #define HF      (GET_nBIT(F, 4))
 #define SET_H   (F |= 0x10)

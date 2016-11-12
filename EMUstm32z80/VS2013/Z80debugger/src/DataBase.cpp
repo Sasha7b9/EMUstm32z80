@@ -22,6 +22,12 @@ DataBase::DataBase()
 
     addressesForScan.push_back(0x66);
     addressesForScan.push_back(0x03f8);
+    addressesForScan.push_back(0x0425);
+    addressesForScan.push_back(0x04c2);
+    addressesForScan.push_back(0x04fe);
+    addressesForScan.push_back(0x053f);
+    addressesForScan.push_back(0x0556);
+    addressesForScan.push_back(0x0605);
 }
 
 
@@ -56,11 +62,6 @@ void DataBase::AddNewData(bool succsefull, int address, OutStruct *params)
 
         command.mnemonic = std::string(params->mnemonic);
 
-        for(int i = 0; i < params->numAddresses; i++)
-        {
-            AddScanAddress((int)params->addresses[i]);
-        }
-
         command.transcript = string(params->transcript);
 
         command.flags = string(params->flags);
@@ -74,7 +75,20 @@ void DataBase::AddNewData(bool succsefull, int address, OutStruct *params)
         command.bad = true;
     }
 
+    if(command.address == 0x04d8)
+    {
+        command.address = command.address;
+    }
+
     commands.push_back(command);
+
+    if(succsefull)
+    {
+        for(int i = 0; i < params->numAddresses; i++)
+        {
+            AddScanAddress((int)params->addresses[i]);
+        }
+    }
 }
 
 
@@ -85,7 +99,17 @@ void DataBase::RemoveScanAddress(int address)
     {
         if(addressesForScan[(uint)i] == address)
         {
+            if(address == 0x04d8)
+            {
+                address = address;
+            }
             addressesForScan.erase(addressesForScan.begin() + i);
+
+            if(address == 0x04d8)
+            {
+                address = address;
+            }
+
             return;
         }
     }
@@ -97,6 +121,10 @@ void DataBase::AddScanAddress(int address)
 {
     if(address < 16384 && !AddressAlreadyScanOrFuture(address))
     {
+        if(address == 0x04d8)
+        {
+            address = address;
+        }
         addressesForScan.push_back(address);
     }
 }
@@ -105,6 +133,11 @@ void DataBase::AddScanAddress(int address)
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 bool DataBase::AddressAlreadyScanOrFuture(int address)
 {
+    if(address == 0x04d8)
+    {
+        address = address;
+    }
+
     for each (auto &command in commands)
     {
         if(command.address == address)
@@ -156,9 +189,9 @@ void DataBase::WriteCommand(ofstream &file, Command &command)
 {
     file << std::right << std::hex << std::setw(4) << std::setfill('0') << command.address << " | ";
 
-   file << std::hex << std::setw(2) << std::setfill('0') << std::right << (int)command.opCodes[0] << " | ";
-   WriteBinaryByte(file, (int)command.opCodes[0]);
-   file << " | ";
+    file << std::hex << std::setw(2) << std::setfill('0') << std::right << (int)command.opCodes[0] << " | ";
+    WriteBinaryByte(file, (int)command.opCodes[0]);
+    file << " | ";
 
     if(command.bad)
     {
