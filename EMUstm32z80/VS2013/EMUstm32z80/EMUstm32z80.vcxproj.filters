@@ -28,7 +28,6 @@
       <Filter>CPU</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\defines.c" />
-    <ClCompile Include="..\..\src\RAM.c" />
     <ClCompile Include="src\common.c" />
     <ClCompile Include="src\DLLmain.c" />
     <ClCompile Include="..\..\src\CPU\instrShift.c">
@@ -40,6 +39,7 @@
     <ClCompile Include="..\..\src\CPU\instrFDCB_DDCB.c">
       <Filter>CPU</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\RAM.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\defines.h" />
@@ -68,7 +68,6 @@
     <ClInclude Include="..\..\src\CPU\instrCB.h">
       <Filter>CPU</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\RAM.h" />
     <ClInclude Include="src\common.h" />
     <ClInclude Include="src\DLLmain.h" />
     <ClInclude Include="..\..\src\CPU\instrShift.h">
@@ -98,6 +97,7 @@
     <ClInclude Include="..\..\src\CPU\FuncThird.h">
       <Filter>CPU</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\RAM.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CPU">
